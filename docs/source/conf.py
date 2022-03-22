@@ -12,6 +12,7 @@
 #
 import os
 import re
+import subprocess
 import sys
 import warnings
 
@@ -60,6 +61,16 @@ templates_path = ["_templates"]
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+current_ref = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"]).decode("utf-8")
+version = current_ref
+
+tag_refs = (
+    subprocess.check_output(["git", "tag", "-l", "--sort=committerdate", "v*"])
+    .decode("utf-8")
+    .split()
+)
+tag_refs = tag_refs[-6:]
+
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -72,6 +83,16 @@ html_theme = "sphinx_rtd_theme"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = []
+
+html_context = {}
+html_context["current_version"] = current_ref
+
+html_context["tags"] = list()
+for tag in tag_refs:
+    html_context["tags"].append((tag, tag))
+
+html_context["branches"] = list()
+html_context["branches"].append(("main", "main"))
 
 source_parsers = {".md": CommonMarkParser}
 source_suffix = [".rst", ".md"]
