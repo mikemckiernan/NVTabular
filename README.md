@@ -1,4 +1,4 @@
-## [NVTabular](https://github.com/NVIDIA/NVTabular) | [Documentation](https://nvidia-merlin.github.io/NVTabular/main/Introduction.html)
+# [NVTabular](https://github.com/NVIDIA/NVTabular) | [Documentation](https://nvidia-merlin.github.io/NVTabular/main/Introduction.html)
 
 [NVTabular](https://github.com/NVIDIA/NVTabular) is a feature engineering and preprocessing library for tabular data that is designed to easily manipulate terabyte scale datasets and train deep learning (DL) based recommender systems. It provides high-level abstraction to simplify code and accelerates computation on the GPU using the [RAPIDS Dask-cuDF](https://github.com/rapidsai/cudf/tree/main/python/dask_cudf) library. NVTabular is designed to be interoperable with both PyTorch and TensorFlow using dataloaders that have been developed as extensions of native framework code. In our experiments, we were able to speed up existing TensorFlow pipelines by nine times and existing PyTorch pipelines by five times with our highly-optimized dataloaders.
 
@@ -6,7 +6,7 @@ NVTabular is a component of [NVIDIA Merlin Open Beta](https://developer.nvidia.c
 
 <img src='https://developer.nvidia.com/blog/wp-content/uploads/2020/07/recommender-system-training-pipeline-1.png'/>
 
-### Benefits
+## Benefits
 
 When training DL recommender systems, data scientists and machine learning (ML) engineers have been faced with the following challenges:
 
