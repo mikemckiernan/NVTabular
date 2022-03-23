@@ -3,14 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ColumnGroup &mdash; NVTabular 2021 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>ColumnGroup &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -107,8 +105,8 @@
 <div class="section" id="module-nvtabular.column_group">
 <span id="columngroup"></span><h1>ColumnGroup<a class="headerlink" href="#module-nvtabular.column_group" title="Permalink to this headline"></a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="nvtabular.column_group.ColumnGroup">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nvtabular.column_group.</span></span><span class="sig-name descname"><span class="pre">ColumnGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nvtabular/column_group.html#ColumnGroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.column_group.ColumnGroup" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.column_group.ColumnGroup">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">nvtabular.column_group.</span></code><code class="sig-name descname"><span class="pre">ColumnGroup</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nvtabular/column_group.html#ColumnGroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.column_group.ColumnGroup" title="Permalink to this definition"></a></dt>
 <dd><p>A ColumnGroup is a group of columns that you want to apply the same transformations to.
 ColumnGroup’s can be transformed by shifting operators on to them, which returns a new
 ColumnGroup with the transformations applied. This lets you define a graph of operations
@@ -121,8 +119,8 @@ for feature crosses.</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="nvtabular.column_group.ColumnGroup.__add__">
-<span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nvtabular/column_group.html#ColumnGroup.__add__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.column_group.ColumnGroup.__add__" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.column_group.ColumnGroup.__add__">
+<code class="sig-name descname"><span class="pre">__add__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nvtabular/column_group.html#ColumnGroup.__add__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.column_group.ColumnGroup.__add__" title="Permalink to this definition"></a></dt>
 <dd><p>Adds columns from this ColumnGroup with another to return a new ColumnGroup</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -138,8 +136,8 @@ for feature crosses.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="nvtabular.column_group.ColumnGroup.__getitem__">
-<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nvtabular/column_group.html#ColumnGroup.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.column_group.ColumnGroup.__getitem__" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.column_group.ColumnGroup.__getitem__">
+<code class="sig-name descname"><span class="pre">__getitem__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nvtabular/column_group.html#ColumnGroup.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.column_group.ColumnGroup.__getitem__" title="Permalink to this definition"></a></dt>
 <dd><p>Selects certain columns from this ColumnGroup, and returns a new Columngroup with only
 those columns</p>
 <dl class="field-list simple">
@@ -156,8 +154,8 @@ those columns</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="nvtabular.column_group.ColumnGroup.__radd__">
-<span class="sig-name descname"><span class="pre">__radd__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nvtabular.column_group.ColumnGroup.__radd__" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.column_group.ColumnGroup.__radd__">
+<code class="sig-name descname"><span class="pre">__radd__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nvtabular.column_group.ColumnGroup.__radd__" title="Permalink to this definition"></a></dt>
 <dd><p>Adds columns from this ColumnGroup with another to return a new ColumnGroup</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -173,8 +171,8 @@ those columns</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="nvtabular.column_group.ColumnGroup.__rshift__">
-<span class="sig-name descname"><span class="pre">__rshift__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nvtabular/column_group.html#ColumnGroup.__rshift__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.column_group.ColumnGroup.__rshift__" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.column_group.ColumnGroup.__rshift__">
+<code class="sig-name descname"><span class="pre">__rshift__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nvtabular/column_group.html#ColumnGroup.__rshift__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.column_group.ColumnGroup.__rshift__" title="Permalink to this definition"></a></dt>
 <dd><p>Transforms this ColumnGroup by applying an Operator</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -190,8 +188,8 @@ those columns</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="nvtabular.column_group.ColumnGroup.__sub__">
-<span class="sig-name descname"><span class="pre">__sub__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nvtabular/column_group.html#ColumnGroup.__sub__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.column_group.ColumnGroup.__sub__" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.column_group.ColumnGroup.__sub__">
+<code class="sig-name descname"><span class="pre">__sub__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nvtabular/column_group.html#ColumnGroup.__sub__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.column_group.ColumnGroup.__sub__" title="Permalink to this definition"></a></dt>
 <dd><p>Removes columns from this ColumnGroup with another to return a new ColumnGroup</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -207,28 +205,28 @@ those columns</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="nvtabular.column_group.ColumnGroup.__weakref__">
-<span class="sig-name descname"><span class="pre">__weakref__</span></span><a class="headerlink" href="#nvtabular.column_group.ColumnGroup.__weakref__" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.column_group.ColumnGroup.__weakref__">
+<code class="sig-name descname"><span class="pre">__weakref__</span></code><a class="headerlink" href="#nvtabular.column_group.ColumnGroup.__weakref__" title="Permalink to this definition"></a></dt>
 <dd><p>list of weak references to the object (if defined)</p>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="nvtabular.column_group.ColumnGroup.input_column_names">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">input_column_names</span></span><a class="headerlink" href="#nvtabular.column_group.ColumnGroup.input_column_names" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt id="nvtabular.column_group.ColumnGroup.input_column_names">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">input_column_names</span></code><a class="headerlink" href="#nvtabular.column_group.ColumnGroup.input_column_names" title="Permalink to this definition"></a></dt>
 <dd><p>Returns the names of columns in the main chain</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="nvtabular.column_group._merge_add_nodes">
-<span class="sig-prename descclassname"><span class="pre">nvtabular.column_group.</span></span><span class="sig-name descname"><span class="pre">_merge_add_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nvtabular/column_group.html#_merge_add_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.column_group._merge_add_nodes" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.column_group._merge_add_nodes">
+<code class="sig-prename descclassname"><span class="pre">nvtabular.column_group.</span></code><code class="sig-name descname"><span class="pre">_merge_add_nodes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nvtabular/column_group.html#_merge_add_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.column_group._merge_add_nodes" title="Permalink to this definition"></a></dt>
 <dd><p>Merges repeat ‘+’ nodes, leading to nicer looking outputs</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="nvtabular.column_group._to_graphviz">
-<span class="sig-prename descclassname"><span class="pre">nvtabular.column_group.</span></span><span class="sig-name descname"><span class="pre">_to_graphviz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_group</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nvtabular/column_group.html#_to_graphviz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.column_group._to_graphviz" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.column_group._to_graphviz">
+<code class="sig-prename descclassname"><span class="pre">nvtabular.column_group.</span></code><code class="sig-name descname"><span class="pre">_to_graphviz</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_group</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nvtabular/column_group.html#_to_graphviz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.column_group._to_graphviz" title="Permalink to this definition"></a></dt>
 <dd><p>Converts a ColumnGroup to a GraphViz DiGraph object useful for display in notebooks</p>
 </dd></dl>
 
@@ -262,31 +260,10 @@ those columns</p>
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     <span class="fa fa-book"> Other Versions</span>
-    v: v0.6.0
+    v: Version(name='v0.6.0', url='column_group.html', version='', release='2021', is_released=False)
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">
-    <dl>
-      <dt>Tags</dt>
-      <dd><a href="../../v0.1.0/index.html">v0.1.0</a></dd>
-      <dd><a href="../../v0.1.1/index.html">v0.1.1</a></dd>
-      <dd><a href="../../v0.2.0/index.html">v0.2.0</a></dd>
-      <dd><a href="../../v0.3.0/index.html">v0.3.0</a></dd>
-      <dd><a href="../../v0.4.0/index.html">v0.4.0</a></dd>
-      <dd><a href="../../v0.5.0/index.html">v0.5.0</a></dd>
-      <dd><a href="../../v0.5.1/index.html">v0.5.1</a></dd>
-      <dd><a href="../../v0.5.2/index.html">v0.5.2</a></dd>
-      <dd><a href="../../v0.5.3/api/column_group.html">v0.5.3</a></dd>
-      <dd><a href="column_group.html">v0.6.0</a></dd>
-      <dd><a href="../../v0.6.1/api/column_group.html">v0.6.1</a></dd>
-      <dd><a href="../../v0.7.0/index.html">v0.7.0</a></dd>
-      <dd><a href="../../v0.7.1/index.html">v0.7.1</a></dd>
-      <dd><a href="../../v0.8.0/index.html">v0.8.0</a></dd>
-    </dl>
-    <dl>
-      <dt>Branches</dt>
-      <dd><a href="../../main/index.html">main</a></dd>
-    </dl>
   </div>
 </div><script>
       jQuery(function () {

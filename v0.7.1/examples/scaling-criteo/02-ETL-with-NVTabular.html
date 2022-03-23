@@ -3,20 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scaling Criteo: ETL with NVTabular &mdash; NVTabular 2021 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <title>Scaling Criteo: ETL with NVTabular &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -303,7 +301,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
@@ -367,8 +365,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Copyright 2021 NVIDIA Corporation. All Rights Reserved.</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright 2021 NVIDIA Corporation. All Rights Reserved.</span>
 <span class="c1">#</span>
 <span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
 <span class="c1"># you may not use this file except in compliance with the License.</span>
@@ -385,7 +382,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p><img alt="86810b657ac54bc9a9ebba923271ca97" src="http://developer.download.nvidia.com/compute/machine-learning/frameworks/nvidia_logo.png" /></p>
+<p><img alt="a8c48a4f486d4cd8b97354331730172b" src="http://developer.download.nvidia.com/compute/machine-learning/frameworks/nvidia_logo.png" /></p>
 <div class="section" id="Scaling-Criteo:-ETL-with-NVTabular">
 <h1>Scaling Criteo: ETL with NVTabular<a class="headerlink" href="#Scaling-Criteo:-ETL-with-NVTabular" title="Permalink to this headline"></a></h1>
 <div class="section" id="Overview">
@@ -418,7 +415,7 @@ div.rendered_html tbody tr:hover {
 <li><p>Dask Bag: Similar to a Dask-based version of PyToolz or a Pythonic version of PySpark RDD</p></li>
 </ul>
 <p>For example, Dask DataFrame provides a convenient API for decomposing large Pandas (or cuDF) DataFrame/Series objects into a collection of DataFrame partitions.</p>
-<p><img alt="bea05085439943108e8bfd712d7e0512" class="no-scaled-link" src="../../_images/dask-dataframe.svg" width="20%" /></p>
+<p><img alt="fceb302a2fa94e56854022e05e4dc06b" class="no-scaled-link" src="../../_images/dask-dataframe.svg" width="20%" /></p>
 <p>We use <strong>dask_cudf</strong> to process large datasets as a collection of cuDF dataframes instead of Pandas. CuDF is a GPU DataFrame library for loading, joining, aggregating, filtering, and otherwise manipulating data. <strong>Dask enables easily to schedule tasks for multiple workers: multi-GPU or multi-node. We just need to initialize a Dask cluster (``LocalCUDACluster``) and NVTabular will use the cluster to execture the workflow.</strong></p>
 </div>
 </div>
@@ -433,8 +430,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Standard Libraries</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Standard Libraries</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
@@ -462,8 +458,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># define some information about where to get our data</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define some information about where to get our data</span>
 <span class="n">BASE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;BASE_DIR&quot;</span><span class="p">,</span> <span class="s2">&quot;/raid/data/criteo&quot;</span><span class="p">)</span>
 <span class="n">INPUT_DATA_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;INPUT_DATA_DIR&quot;</span><span class="p">,</span> <span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s2">&quot;/converted/criteo&quot;</span><span class="p">)</span>
 <span class="n">dask_workdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s2">&quot;test_dask/workdir&quot;</span><span class="p">)</span>
@@ -492,8 +487,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;day_</span><span class="si">{}</span><span class="s2">.parquet&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;day_</span><span class="si">{}</span><span class="s2">.parquet&quot;</span>
 <span class="n">num_days</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span>
     <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">INPUT_DATA_DIR</span><span class="p">)</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">fname</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;[0-9]{1,2}&quot;</span><span class="p">),</span> <span class="n">i</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
 <span class="p">)</span>
@@ -508,8 +502,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="n">train_paths</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">train_paths</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">valid_paths</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -531,8 +524,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Dask dashboard</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dask dashboard</span>
 <span class="n">dashboard_port</span> <span class="o">=</span> <span class="s2">&quot;8787&quot;</span>
 
 <span class="c1"># Deploy a Single-Machine Multi-GPU Cluster</span>
@@ -613,8 +605,7 @@ magnitude and are uncentered (i.e. E[x] != 0).</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># define our dataset schema</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define our dataset schema</span>
 <span class="n">CONTINUOUS_COLUMNS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">14</span><span class="p">)]</span>
 <span class="n">CATEGORICAL_COLUMNS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;C&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">27</span><span class="p">)]</span>
 <span class="n">LABEL_COLUMNS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span>
@@ -635,8 +626,7 @@ magnitude and are uncentered (i.e. E[x] != 0).</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">dict_dtypes</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict_dtypes</span> <span class="o">=</span> <span class="p">{}</span>
 
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">CATEGORICAL_COLUMNS</span><span class="p">:</span>
     <span class="n">dict_dtypes</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span>
@@ -653,8 +643,7 @@ magnitude and are uncentered (i.e. E[x] != 0).</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">train_paths</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;parquet&quot;</span><span class="p">,</span> <span class="n">part_size</span><span class="o">=</span><span class="n">part_size</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">train_paths</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;parquet&quot;</span><span class="p">,</span> <span class="n">part_size</span><span class="o">=</span><span class="n">part_size</span><span class="p">)</span>
 <span class="n">valid_dataset</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">valid_paths</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;parquet&quot;</span><span class="p">,</span> <span class="n">part_size</span><span class="o">=</span><span class="n">part_size</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -664,8 +653,7 @@ magnitude and are uncentered (i.e. E[x] != 0).</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">output_train_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUTPUT_DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;train/&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_train_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUTPUT_DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;train/&quot;</span><span class="p">)</span>
 <span class="n">output_valid_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUTPUT_DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;valid/&quot;</span><span class="p">)</span>
 <span class="o">!</span> mkdir -p <span class="nv">$output_train_dir</span>
 <span class="o">!</span> mkdir -p <span class="nv">$output_valid_dir</span>
@@ -677,8 +665,7 @@ magnitude and are uncentered (i.e. E[x] != 0).</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 <span class="n">workflow</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -696,8 +683,7 @@ Wall time: 1min 5s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Add &quot;write_hugectr_keyset=True&quot; to &quot;to_parquet&quot; if using this ETL Notebook for training with HugeCTR</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add &quot;write_hugectr_keyset=True&quot; to &quot;to_parquet&quot; if using this ETL Notebook for training with HugeCTR</span>
 <span class="o">%%time</span>
 <span class="n">workflow</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">)</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span>
     <span class="n">output_files</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">NUM_GPUS</span><span class="p">),</span>
@@ -724,8 +710,7 @@ Wall time: 1min 59s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Add &quot;write_hugectr_keyset=True&quot; to &quot;to_parquet&quot; if using this ETL Notebook for training with HugeCTR</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add &quot;write_hugectr_keyset=True&quot; to &quot;to_parquet&quot; if using this ETL Notebook for training with HugeCTR</span>
 <span class="o">%%time</span>
 <span class="n">workflow</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">valid_dataset</span><span class="p">)</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span>
     <span class="n">output_path</span><span class="o">=</span><span class="n">output_valid_dir</span><span class="p">,</span>
@@ -751,8 +736,7 @@ Wall time: 5.17 s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">workflow</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUTPUT_DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;workflow&quot;</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUTPUT_DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;workflow&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -789,31 +773,10 @@ Wall time: 5.17 s
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     <span class="fa fa-book"> Other Versions</span>
-    v: v0.7.1
+    v: Version(name='v0.7.1', url='02-ETL-with-NVTabular.html', version='', release='2021', is_released=False)
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">
-    <dl>
-      <dt>Tags</dt>
-      <dd><a href="../../../v0.1.0/index.html">v0.1.0</a></dd>
-      <dd><a href="../../../v0.1.1/index.html">v0.1.1</a></dd>
-      <dd><a href="../../../v0.2.0/index.html">v0.2.0</a></dd>
-      <dd><a href="../../../v0.3.0/index.html">v0.3.0</a></dd>
-      <dd><a href="../../../v0.4.0/index.html">v0.4.0</a></dd>
-      <dd><a href="../../../v0.5.0/index.html">v0.5.0</a></dd>
-      <dd><a href="../../../v0.5.1/index.html">v0.5.1</a></dd>
-      <dd><a href="../../../v0.5.2/index.html">v0.5.2</a></dd>
-      <dd><a href="../../../v0.5.3/index.html">v0.5.3</a></dd>
-      <dd><a href="../../../v0.6.0/index.html">v0.6.0</a></dd>
-      <dd><a href="../../../v0.6.1/index.html">v0.6.1</a></dd>
-      <dd><a href="../../../v0.7.0/index.html">v0.7.0</a></dd>
-      <dd><a href="02-ETL-with-NVTabular.html">v0.7.1</a></dd>
-      <dd><a href="../../../v0.8.0/index.html">v0.8.0</a></dd>
-    </dl>
-    <dl>
-      <dt>Branches</dt>
-      <dd><a href="../../../main/index.html">main</a></dd>
-    </dl>
   </div>
 </div><script>
       jQuery(function () {

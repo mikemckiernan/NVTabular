@@ -3,14 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WorkflowNode &mdash; NVTabular 2021 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <title>WorkflowNode &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -109,8 +107,8 @@
 <div class="section" id="module-nvtabular.workflow.node">
 <span id="workflownode"></span><h1>WorkflowNode<a class="headerlink" href="#module-nvtabular.workflow.node" title="Permalink to this headline"></a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="nvtabular.workflow.node.WorkflowNode">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nvtabular.workflow.node.</span></span><span class="sig-name descname"><span class="pre">WorkflowNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/workflow/node.html#WorkflowNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.workflow.node.WorkflowNode" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.workflow.node.WorkflowNode">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">nvtabular.workflow.node.</span></code><code class="sig-name descname"><span class="pre">WorkflowNode</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/workflow/node.html#WorkflowNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.workflow.node.WorkflowNode" title="Permalink to this definition"></a></dt>
 <dd><p>A WorkflowNode is a group of columns that you want to apply the same transformations to.
 WorkflowNode’s can be transformed by shifting operators on to them, which returns a new
 WorkflowNode with the transformations applied. This lets you define a graph of operations
@@ -121,8 +119,8 @@ that makes up your workflow</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="nvtabular.workflow.node.WorkflowNode.__add__">
-<span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/workflow/node.html#WorkflowNode.__add__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.workflow.node.WorkflowNode.__add__" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.workflow.node.WorkflowNode.__add__">
+<code class="sig-name descname"><span class="pre">__add__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/workflow/node.html#WorkflowNode.__add__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.workflow.node.WorkflowNode.__add__" title="Permalink to this definition"></a></dt>
 <dd><p>Adds columns from this WorkflowNode with another to return a new WorkflowNode</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -138,8 +136,8 @@ that makes up your workflow</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="nvtabular.workflow.node.WorkflowNode.__getitem__">
-<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/workflow/node.html#WorkflowNode.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.workflow.node.WorkflowNode.__getitem__" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.workflow.node.WorkflowNode.__getitem__">
+<code class="sig-name descname"><span class="pre">__getitem__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/workflow/node.html#WorkflowNode.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.workflow.node.WorkflowNode.__getitem__" title="Permalink to this definition"></a></dt>
 <dd><p>Selects certain columns from this WorkflowNode, and returns a new Columngroup with only
 those columns</p>
 <dl class="field-list simple">
@@ -156,8 +154,8 @@ those columns</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="nvtabular.workflow.node.WorkflowNode.__radd__">
-<span class="sig-name descname"><span class="pre">__radd__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nvtabular.workflow.node.WorkflowNode.__radd__" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.workflow.node.WorkflowNode.__radd__">
+<code class="sig-name descname"><span class="pre">__radd__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nvtabular.workflow.node.WorkflowNode.__radd__" title="Permalink to this definition"></a></dt>
 <dd><p>Adds columns from this WorkflowNode with another to return a new WorkflowNode</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -173,8 +171,8 @@ those columns</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="nvtabular.workflow.node.WorkflowNode.__rshift__">
-<span class="sig-name descname"><span class="pre">__rshift__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/workflow/node.html#WorkflowNode.__rshift__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.workflow.node.WorkflowNode.__rshift__" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.workflow.node.WorkflowNode.__rshift__">
+<code class="sig-name descname"><span class="pre">__rshift__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/workflow/node.html#WorkflowNode.__rshift__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.workflow.node.WorkflowNode.__rshift__" title="Permalink to this definition"></a></dt>
 <dd><p>Transforms this WorkflowNode by applying an Operator</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -190,8 +188,8 @@ those columns</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="nvtabular.workflow.node.WorkflowNode.__sub__">
-<span class="sig-name descname"><span class="pre">__sub__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/workflow/node.html#WorkflowNode.__sub__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.workflow.node.WorkflowNode.__sub__" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.workflow.node.WorkflowNode.__sub__">
+<code class="sig-name descname"><span class="pre">__sub__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/workflow/node.html#WorkflowNode.__sub__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.workflow.node.WorkflowNode.__sub__" title="Permalink to this definition"></a></dt>
 <dd><p>Removes columns from this WorkflowNode with another to return a new WorkflowNode</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -207,16 +205,16 @@ those columns</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="nvtabular.workflow.node.WorkflowNode.__weakref__">
-<span class="sig-name descname"><span class="pre">__weakref__</span></span><a class="headerlink" href="#nvtabular.workflow.node.WorkflowNode.__weakref__" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.workflow.node.WorkflowNode.__weakref__">
+<code class="sig-name descname"><span class="pre">__weakref__</span></code><a class="headerlink" href="#nvtabular.workflow.node.WorkflowNode.__weakref__" title="Permalink to this definition"></a></dt>
 <dd><p>list of weak references to the object (if defined)</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="nvtabular.workflow.node._to_graphviz">
-<span class="sig-prename descclassname"><span class="pre">nvtabular.workflow.node.</span></span><span class="sig-name descname"><span class="pre">_to_graphviz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workflow_node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/workflow/node.html#_to_graphviz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.workflow.node._to_graphviz" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.workflow.node._to_graphviz">
+<code class="sig-prename descclassname"><span class="pre">nvtabular.workflow.node.</span></code><code class="sig-name descname"><span class="pre">_to_graphviz</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workflow_node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/workflow/node.html#_to_graphviz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.workflow.node._to_graphviz" title="Permalink to this definition"></a></dt>
 <dd><p>Converts a WorkflowNode to a GraphViz DiGraph object useful for display in notebooks</p>
 </dd></dl>
 
@@ -250,31 +248,10 @@ those columns</p>
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     <span class="fa fa-book"> Other Versions</span>
-    v: v0.7.1
+    v: Version(name='v0.7.1', url='workflow_node.html', version='', release='2021', is_released=False)
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">
-    <dl>
-      <dt>Tags</dt>
-      <dd><a href="../../../v0.1.0/index.html">v0.1.0</a></dd>
-      <dd><a href="../../../v0.1.1/index.html">v0.1.1</a></dd>
-      <dd><a href="../../../v0.2.0/index.html">v0.2.0</a></dd>
-      <dd><a href="../../../v0.3.0/index.html">v0.3.0</a></dd>
-      <dd><a href="../../../v0.4.0/index.html">v0.4.0</a></dd>
-      <dd><a href="../../../v0.5.0/index.html">v0.5.0</a></dd>
-      <dd><a href="../../../v0.5.1/index.html">v0.5.1</a></dd>
-      <dd><a href="../../../v0.5.2/index.html">v0.5.2</a></dd>
-      <dd><a href="../../../v0.5.3/index.html">v0.5.3</a></dd>
-      <dd><a href="../../../v0.6.0/index.html">v0.6.0</a></dd>
-      <dd><a href="../../../v0.6.1/index.html">v0.6.1</a></dd>
-      <dd><a href="../../../v0.7.0/api/workflow/workflow_node.html">v0.7.0</a></dd>
-      <dd><a href="workflow_node.html">v0.7.1</a></dd>
-      <dd><a href="../../../v0.8.0/api/workflow/workflow_node.html">v0.8.0</a></dd>
-    </dl>
-    <dl>
-      <dt>Branches</dt>
-      <dd><a href="../../../main/api/workflow/workflow_node.html">main</a></dd>
-    </dl>
   </div>
 </div><script>
       jQuery(function () {

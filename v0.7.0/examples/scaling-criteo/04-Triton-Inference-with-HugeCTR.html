@@ -3,20 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scaling Criteo: Triton Inference with HugeCTR &mdash; NVTabular 2021 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <title>Scaling Criteo: Triton Inference with HugeCTR &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -303,7 +301,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
@@ -367,8 +365,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Copyright 2021 NVIDIA Corporation. All Rights Reserved.</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright 2021 NVIDIA Corporation. All Rights Reserved.</span>
 <span class="c1">#</span>
 <span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
 <span class="c1"># you may not use this file except in compliance with the License.</span>
@@ -391,7 +388,7 @@ div.rendered_html tbody tr:hover {
 <h2>Overview<a class="headerlink" href="#Overview" title="Permalink to this headline"></a></h2>
 <p>The last step is to deploy the ETL workflow and saved model to production. In the production setting, we want to transform the input data as during training (ETL). We need to apply the same mean/std for continuous features and use the same categorical mapping to convert the categories to continuous integer before we use the deep learning model for a prediction. Therefore, we deploy the NVTabular workflow with the HugeCTR model as an ensemble model to Triton Inference. The ensemble model
 guarantees that the same transformation are applied to the raw inputs.</p>
-<p><img alt="17f2f608d1c64bfea2107848471ca1f4" class="no-scaled-link" src="../../_images/triton-hugectr.png" style="width: 25%;" /></p>
+<p><img alt="ec3d2b8212554f349478c550a2a8c07b" class="no-scaled-link" src="../../_images/triton-hugectr.png" style="width: 25%;" /></p>
 <div class="section" id="Learning-objectives">
 <h3>Learning objectives<a class="headerlink" href="#Learning-objectives" title="Permalink to this headline"></a></h3>
 <p>In this notebook, we learn how to deploy our models to production:</p>
@@ -412,8 +409,7 @@ guarantees that the same transformation are applied to the raw inputs.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
@@ -423,8 +419,7 @@ guarantees that the same transformation are applied to the raw inputs.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;mv *9600.model ./criteo_hugectr/1/&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;mv *9600.model ./criteo_hugectr/1/&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -435,8 +430,7 @@ The script below creates an ensemble triton server model where - workflow is the
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">nvtabular</span> <span class="k">as</span> <span class="nn">nvt</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nvtabular</span> <span class="k">as</span> <span class="nn">nvt</span>
 
 <span class="n">BASE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;BASE_DIR&quot;</span><span class="p">,</span> <span class="s2">&quot;/raid/data/criteo&quot;</span><span class="p">)</span>
 <span class="n">input_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s2">&quot;test_dask/output&quot;</span><span class="p">)</span>
@@ -449,8 +443,7 @@ The script below creates an ensemble triton server model where - workflow is the
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;rm -rf /model/*&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;rm -rf /model/*&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -467,8 +460,7 @@ The script below creates an ensemble triton server model where - workflow is the
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">nvtabular.inference.triton</span> <span class="kn">import</span> <span class="n">export_hugectr_ensemble</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nvtabular.inference.triton</span> <span class="kn">import</span> <span class="n">export_hugectr_ensemble</span>
 
 <span class="n">hugectr_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 <span class="n">hugectr_params</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/model/criteo/1/criteo.json&quot;</span>
@@ -495,8 +487,7 @@ The script below creates an ensemble triton server model where - workflow is the
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>tree /model
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>tree /model
 </pre></div>
 </div>
 </div>
@@ -564,8 +555,7 @@ The script below creates an ensemble triton server model where - workflow is the
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%writefile</span> &#39;/model/ps.json&#39;
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> &#39;/model/ps.json&#39;
 <span class="c1"># fmt: off</span>
 <span class="p">{</span>
     <span class="s2">&quot;supportlonglong&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
@@ -598,8 +588,7 @@ Overwriting /model/ps.json
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">tritonhttpclient</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tritonhttpclient</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="n">triton_client</span> <span class="o">=</span> <span class="n">tritonhttpclient</span><span class="o">.</span><span class="n">InferenceServerClient</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;localhost:8000&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -631,8 +620,7 @@ client created.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
@@ -643,8 +631,7 @@ client created.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">triton_client</span><span class="o">.</span><span class="n">is_server_live</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">triton_client</span><span class="o">.</span><span class="n">is_server_live</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -671,8 +658,7 @@ True
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">triton_client</span><span class="o">.</span><span class="n">get_model_repository_index</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">triton_client</span><span class="o">.</span><span class="n">get_model_repository_index</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -704,8 +690,7 @@ bytearray(b&#39;[{&#34;name&#34;:&#34;.ipynb_checkpoints&#34;},{&#34;name&#34;:&
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 
 <span class="n">triton_client</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;criteo_nvt&quot;</span><span class="p">)</span>
 </pre></div>
@@ -728,8 +713,7 @@ Wall time: 20.6 s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 
 <span class="n">triton_client</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;criteo&quot;</span><span class="p">)</span>
 </pre></div>
@@ -752,8 +736,7 @@ Wall time: 32.4 s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 
 <span class="n">triton_client</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;criteo_ens&quot;</span><span class="p">)</span>
 </pre></div>
@@ -780,8 +763,7 @@ Wall time: 20.2 s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Get dataframe library - cudf or pandas</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get dataframe library - cudf or pandas</span>
 <span class="kn">from</span> <span class="nn">nvtabular.dispatch</span> <span class="kn">import</span> <span class="n">get_lib</span>
 <span class="n">df_lib</span> <span class="o">=</span> <span class="n">get_lib</span><span class="p">()</span>
 
@@ -821,8 +803,7 @@ Wall time: 20.2 s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">batch</span><span class="o">.</span><span class="n">dtypes</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch</span><span class="o">.</span><span class="n">dtypes</span>
 </pre></div>
 </div>
 </div>
@@ -878,8 +859,7 @@ dtype: object
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">tritonclient.http</span> <span class="k">as</span> <span class="nn">httpclient</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tritonclient.http</span> <span class="k">as</span> <span class="nn">httpclient</span>
 <span class="kn">from</span> <span class="nn">tritonclient.utils</span> <span class="kn">import</span> <span class="n">np_to_triton_dtype</span>
 
 <span class="n">inputs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -900,8 +880,7 @@ dtype: object
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># placeholder variables for the output</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># placeholder variables for the output</span>
 <span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpclient</span><span class="o">.</span><span class="n">InferRequestedOutput</span><span class="p">(</span><span class="s2">&quot;OUTPUT0&quot;</span><span class="p">)]</span>
 
 <span class="c1"># build a client to connect to our server.</span>
@@ -959,8 +938,7 @@ b&#39;{&#34;id&#34;:&#34;1&#34;,&#34;inputs&#34;:[{&#34;name&#34;:&#34;I1&#34;,&
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">triton_client</span><span class="o">.</span><span class="n">unload_model</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;criteo_ens&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">triton_client</span><span class="o">.</span><span class="n">unload_model</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;criteo_ens&quot;</span><span class="p">)</span>
 <span class="n">triton_client</span><span class="o">.</span><span class="n">unload_model</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;criteo_nvt&quot;</span><span class="p">)</span>
 <span class="n">triton_client</span><span class="o">.</span><span class="n">unload_model</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;criteo&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1017,31 +995,10 @@ Loaded model &#39;criteo&#39;
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     <span class="fa fa-book"> Other Versions</span>
-    v: v0.7.0
+    v: Version(name='v0.7.0', url='04-Triton-Inference-with-HugeCTR.html', version='', release='2021', is_released=False)
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">
-    <dl>
-      <dt>Tags</dt>
-      <dd><a href="../../../v0.1.0/index.html">v0.1.0</a></dd>
-      <dd><a href="../../../v0.1.1/index.html">v0.1.1</a></dd>
-      <dd><a href="../../../v0.2.0/index.html">v0.2.0</a></dd>
-      <dd><a href="../../../v0.3.0/index.html">v0.3.0</a></dd>
-      <dd><a href="../../../v0.4.0/index.html">v0.4.0</a></dd>
-      <dd><a href="../../../v0.5.0/index.html">v0.5.0</a></dd>
-      <dd><a href="../../../v0.5.1/index.html">v0.5.1</a></dd>
-      <dd><a href="../../../v0.5.2/index.html">v0.5.2</a></dd>
-      <dd><a href="../../../v0.5.3/index.html">v0.5.3</a></dd>
-      <dd><a href="../../../v0.6.0/index.html">v0.6.0</a></dd>
-      <dd><a href="../../../v0.6.1/index.html">v0.6.1</a></dd>
-      <dd><a href="04-Triton-Inference-with-HugeCTR.html">v0.7.0</a></dd>
-      <dd><a href="../../../v0.7.1/index.html">v0.7.1</a></dd>
-      <dd><a href="../../../v0.8.0/index.html">v0.8.0</a></dd>
-    </dl>
-    <dl>
-      <dt>Branches</dt>
-      <dd><a href="../../../main/index.html">main</a></dd>
-    </dl>
   </div>
 </div><script>
       jQuery(function () {

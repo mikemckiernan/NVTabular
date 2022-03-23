@@ -3,20 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NVTabular demo on RecSys2020 Challenge &mdash; NVTabular 2021 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <title>NVTabular demo on RecSys2020 Challenge &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -302,7 +300,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
@@ -366,8 +364,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Copyright 2021 NVIDIA Corporation. All Rights Reserved.</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright 2021 NVIDIA Corporation. All Rights Reserved.</span>
 <span class="c1">#</span>
 <span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
 <span class="c1"># you may not use this file except in compliance with the License.</span>
@@ -384,7 +381,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p><img alt="7d7fcdd5e56e4dd5932bd81d2d36f784" src="http://developer.download.nvidia.com/compute/machine-learning/frameworks/nvidia_logo.png" /></p>
+<p><img alt="d514993924294c8c99a29e58a95a1fe7" src="http://developer.download.nvidia.com/compute/machine-learning/frameworks/nvidia_logo.png" /></p>
 <div class="section" id="NVTabular-demo-on-RecSys2020-Challenge">
 <h1>NVTabular demo on RecSys2020 Challenge<a class="headerlink" href="#NVTabular-demo-on-RecSys2020-Challenge" title="Permalink to this headline"></a></h1>
 <div class="section" id="Overview">
@@ -411,8 +408,7 @@ validation set. 3. <strong>NVTabular</strong> to create additional features with
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># External Dependencies</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># External Dependencies</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">glob</span>
 <span class="kn">import</span> <span class="nn">gc</span>
@@ -443,8 +439,7 @@ validation set. 3. <strong>NVTabular</strong> to create additional features with
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">cudf</span><span class="o">.</span><span class="n">__version__</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cudf</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
 </div>
 </div>
@@ -461,8 +456,7 @@ validation set. 3. <strong>NVTabular</strong> to create additional features with
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">cp</span><span class="o">.</span><span class="n">__version__</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
 </div>
 </div>
@@ -479,8 +473,7 @@ validation set. 3. <strong>NVTabular</strong> to create additional features with
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">xgb</span><span class="o">.</span><span class="n">__version__</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xgb</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
 </div>
 </div>
@@ -497,8 +490,7 @@ validation set. 3. <strong>NVTabular</strong> to create additional features with
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">dask</span><span class="o">.</span><span class="n">__version__</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dask</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
 </div>
 </div>
@@ -516,8 +508,7 @@ validation set. 3. <strong>NVTabular</strong> to create additional features with
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>nvidia-smi
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>nvidia-smi
 </pre></div>
 </div>
 </div>
@@ -551,8 +542,7 @@ Wed Dec 16 13:33:38 2020
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>free
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>free
 </pre></div>
 </div>
 </div>
@@ -570,8 +560,7 @@ Swap:       1003516     1003504          12
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">time_total_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_total_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -580,8 +569,7 @@ Swap:       1003516     1003504          12
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">BASE_DIR</span> <span class="o">=</span> <span class="s1">&#39;/raid/data/recsys2020/&#39;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">BASE_DIR</span> <span class="o">=</span> <span class="s1">&#39;/raid/data/recsys2020/&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -590,8 +578,7 @@ Swap:       1003516     1003504          12
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">cluster</span> <span class="o">=</span> <span class="n">LocalCUDACluster</span><span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cluster</span> <span class="o">=</span> <span class="n">LocalCUDACluster</span><span class="p">(</span>
     <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;tcp&quot;</span>
 <span class="p">)</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">cluster</span><span class="p">)</span>
@@ -635,8 +622,7 @@ split the data.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;text_tokens&#39;</span><span class="p">,</span>    <span class="c1">###############</span>
     <span class="s1">&#39;hashtags&#39;</span><span class="p">,</span>       <span class="c1">#Tweet Features</span>
     <span class="s1">&#39;tweet_id&#39;</span><span class="p">,</span>       <span class="c1">#</span>
@@ -671,8 +657,7 @@ split the data.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">splitmedia</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">splitmedia</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">col</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -689,8 +674,7 @@ split the data.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">count_features</span> <span class="o">=</span> <span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_features</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">nvt</span><span class="o">.</span><span class="n">ColumnGroup</span><span class="p">([</span><span class="s1">&#39;hashtags&#39;</span><span class="p">,</span> <span class="s1">&#39;domains&#39;</span><span class="p">,</span> <span class="s1">&#39;links&#39;</span><span class="p">])</span> <span class="o">&gt;&gt;</span>
     <span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">count_token</span><span class="p">(</span><span class="n">col</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">))</span> <span class="o">&gt;&gt;</span>
     <span class="n">nvt</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">Rename</span><span class="p">(</span><span class="n">postfix</span> <span class="o">=</span> <span class="s1">&#39;_count_t&#39;</span><span class="p">)</span>
@@ -703,8 +687,7 @@ split the data.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">split_media</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">ColumnGroup</span><span class="p">([</span><span class="s1">&#39;media&#39;</span><span class="p">])</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">splitmedia</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">split_media</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">ColumnGroup</span><span class="p">([</span><span class="s1">&#39;media&#39;</span><span class="p">])</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">splitmedia</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -713,8 +696,7 @@ split the data.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">multihot_filled</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;hashtags&#39;</span><span class="p">,</span> <span class="s1">&#39;domains&#39;</span><span class="p">,</span> <span class="s1">&#39;links&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">nvt</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">FillMissing</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">multihot_filled</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;hashtags&#39;</span><span class="p">,</span> <span class="s1">&#39;domains&#39;</span><span class="p">,</span> <span class="s1">&#39;links&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">nvt</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">FillMissing</span><span class="p">()</span>
 <span class="n">cat_features</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">split_media</span> <span class="o">+</span> <span class="n">multihot_filled</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;language&#39;</span><span class="p">,</span> <span class="s1">&#39;tweet_type&#39;</span><span class="p">,</span> <span class="s1">&#39;tweet_id&#39;</span><span class="p">,</span> <span class="s1">&#39;a_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;b_user_id&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span>
     <span class="n">nvt</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">Categorify</span><span class="p">()</span>
@@ -727,8 +709,7 @@ split the data.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">label_name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;reply&#39;</span><span class="p">,</span> <span class="s1">&#39;retweet&#39;</span><span class="p">,</span> <span class="s1">&#39;retweet_comment&#39;</span><span class="p">,</span> <span class="s1">&#39;like&#39;</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label_name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;reply&#39;</span><span class="p">,</span> <span class="s1">&#39;retweet&#39;</span><span class="p">,</span> <span class="s1">&#39;retweet_comment&#39;</span><span class="p">,</span> <span class="s1">&#39;like&#39;</span><span class="p">]</span>
 <span class="n">label_name_feature</span> <span class="o">=</span> <span class="n">label_name</span> <span class="o">&gt;&gt;</span> <span class="n">nvt</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">FillMissing</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -738,8 +719,7 @@ split the data.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">weekday</span> <span class="o">=</span> <span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weekday</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">nvt</span><span class="o">.</span><span class="n">ColumnGroup</span><span class="p">([</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])</span> <span class="o">&gt;&gt;</span>
     <span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">cudf</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">weekday</span><span class="p">)</span> <span class="o">&gt;&gt;</span>
     <span class="n">nvt</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">Rename</span><span class="p">(</span><span class="n">postfix</span> <span class="o">=</span> <span class="s1">&#39;_wd&#39;</span><span class="p">)</span>
@@ -752,8 +732,7 @@ split the data.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">output</span> <span class="o">=</span> <span class="n">count_features</span><span class="o">+</span><span class="n">cat_features</span><span class="o">+</span><span class="n">label_name_feature</span><span class="o">+</span><span class="n">weekday</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">count_features</span><span class="o">+</span><span class="n">cat_features</span><span class="o">+</span><span class="n">label_name_feature</span><span class="o">+</span><span class="n">weekday</span>
 <span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="o">.</span><span class="n">graph</span>
 </pre></div>
 </div>
@@ -770,8 +749,7 @@ split the data.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">remaining_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">features</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">columns</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;text_tokens&#39;</span><span class="p">])]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">remaining_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">features</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">columns</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;text_tokens&#39;</span><span class="p">])]</span>
 <span class="n">remaining_columns</span>
 </pre></div>
 </div>
@@ -799,8 +777,7 @@ split the data.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">proc</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">output</span><span class="o">+</span><span class="n">remaining_columns</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proc</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">output</span><span class="o">+</span><span class="n">remaining_columns</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -809,8 +786,7 @@ split the data.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">trains_itrs</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;training.tsv&#39;</span><span class="p">,</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trains_itrs</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;training.tsv&#39;</span><span class="p">,</span>
                           <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                           <span class="n">names</span><span class="o">=</span><span class="n">features</span><span class="p">,</span>
                           <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span>
@@ -824,8 +800,7 @@ split the data.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 
 <span class="n">time_preproc_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">proc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trains_itrs</span><span class="p">)</span>
@@ -847,8 +822,7 @@ Wall time: 2min 14s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">dict_dtypes</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict_dtypes</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">label_name</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;media&#39;</span><span class="p">,</span> <span class="s1">&#39;language&#39;</span><span class="p">,</span> <span class="s1">&#39;tweet_type&#39;</span><span class="p">,</span> <span class="s1">&#39;tweet_id&#39;</span><span class="p">,</span>
                          <span class="s1">&#39;a_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;b_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;hashtags&#39;</span><span class="p">,</span> <span class="s1">&#39;domains&#39;</span><span class="p">,</span>
                          <span class="s1">&#39;links&#39;</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">,</span> <span class="s1">&#39;a_follower_count&#39;</span><span class="p">,</span>
@@ -862,8 +836,7 @@ Wall time: 2min 14s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 
 <span class="n">time_preproc_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">proc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">trains_itrs</span><span class="p">)</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">output_path</span><span class="o">=</span><span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;preprocess/&#39;</span><span class="p">,</span> <span class="n">dtypes</span><span class="o">=</span><span class="n">dict_dtypes</span><span class="p">)</span>
@@ -894,8 +867,7 @@ Wall time: 2min 20s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>ls <span class="nv">$BASE_DIR</span>/preprocess
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls <span class="nv">$BASE_DIR</span>/preprocess
 </pre></div>
 </div>
 </div>
@@ -926,8 +898,7 @@ part.19.parquet  part.2.parquet   part.40.parquet  part.9.parquet
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 
 <span class="n">time_split_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
@@ -974,8 +945,7 @@ Wall time: 1min 2s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>nvidia-smi
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>nvidia-smi
 </pre></div>
 </div>
 </div>
@@ -1011,8 +981,7 @@ Wed Dec 16 13:39:20 2020
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">count_encode</span> <span class="o">=</span> <span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_encode</span> <span class="o">=</span> <span class="p">(</span>
     <span class="p">[</span><span class="s1">&#39;media&#39;</span><span class="p">,</span> <span class="s1">&#39;tweet_type&#39;</span><span class="p">,</span> <span class="s1">&#39;language&#39;</span><span class="p">,</span> <span class="s1">&#39;a_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;b_user_id&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span>
     <span class="n">nvt</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">JoinGroupby</span><span class="p">(</span><span class="n">cont_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;reply&#39;</span><span class="p">],</span><span class="n">stats</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">],</span> <span class="n">out_path</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">)</span>
 <span class="p">)</span>
@@ -1024,8 +993,7 @@ Wed Dec 16 13:39:20 2020
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">datetime</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">ColumnGroup</span><span class="p">([</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">cudf</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int32&#39;</span><span class="p">),</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datetime</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">ColumnGroup</span><span class="p">([</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">cudf</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int32&#39;</span><span class="p">),</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1034,8 +1002,7 @@ Wed Dec 16 13:39:20 2020
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">hour</span> <span class="o">=</span> <span class="n">datetime</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">col</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">nvt</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">Rename</span><span class="p">(</span><span class="n">postfix</span> <span class="o">=</span> <span class="s1">&#39;_hour&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hour</span> <span class="o">=</span> <span class="n">datetime</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">col</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">nvt</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">Rename</span><span class="p">(</span><span class="n">postfix</span> <span class="o">=</span> <span class="s1">&#39;_hour&#39;</span><span class="p">)</span>
 <span class="n">minute</span> <span class="o">=</span> <span class="n">datetime</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">col</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">minute</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">nvt</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">Rename</span><span class="p">(</span><span class="n">postfix</span> <span class="o">=</span> <span class="s1">&#39;_minute&#39;</span><span class="p">)</span>
 <span class="n">seconds</span> <span class="o">=</span> <span class="n">datetime</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">col</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">second</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">nvt</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">Rename</span><span class="p">(</span><span class="n">postfix</span> <span class="o">=</span> <span class="s1">&#39;_second&#39;</span><span class="p">)</span>
 </pre></div>
@@ -1046,8 +1013,7 @@ Wed Dec 16 13:39:20 2020
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">diff_lag</span> <span class="o">=</span> <span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff_lag</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">nvt</span><span class="o">.</span><span class="n">ColumnGroup</span><span class="p">([</span><span class="s1">&#39;b_follower_count&#39;</span><span class="p">,</span><span class="s1">&#39;b_following_count&#39;</span><span class="p">,</span><span class="s1">&#39;language&#39;</span><span class="p">])</span> <span class="o">&gt;&gt;</span>
     <span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">col</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">))</span> <span class="o">&gt;&gt;</span>
     <span class="n">nvt</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">DifferenceLag</span><span class="p">(</span><span class="n">partition_cols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;b_user_id&#39;</span><span class="p">],</span> <span class="n">shift</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;&gt;</span>
@@ -1061,8 +1027,7 @@ Wed Dec 16 13:39:20 2020
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">LABEL_COLUMNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;reply&#39;</span><span class="p">,</span> <span class="s1">&#39;retweet&#39;</span><span class="p">,</span> <span class="s1">&#39;retweet_comment&#39;</span><span class="p">,</span> <span class="s1">&#39;like&#39;</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">LABEL_COLUMNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;reply&#39;</span><span class="p">,</span> <span class="s1">&#39;retweet&#39;</span><span class="p">,</span> <span class="s1">&#39;retweet_comment&#39;</span><span class="p">,</span> <span class="s1">&#39;like&#39;</span><span class="p">]</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">ColumnGroup</span><span class="p">(</span><span class="n">LABEL_COLUMNS</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="p">(</span><span class="n">col</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int8&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -1072,8 +1037,7 @@ Wed Dec 16 13:39:20 2020
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">target_encode</span> <span class="o">=</span> <span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target_encode</span> <span class="o">=</span> <span class="p">(</span>
     <span class="p">[</span><span class="s1">&#39;media&#39;</span><span class="p">,</span> <span class="s1">&#39;tweet_type&#39;</span><span class="p">,</span> <span class="s1">&#39;language&#39;</span><span class="p">,</span> <span class="s1">&#39;a_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;b_user_id&#39;</span><span class="p">,</span>
      <span class="p">[</span><span class="s1">&#39;domains&#39;</span><span class="p">,</span><span class="s1">&#39;language&#39;</span><span class="p">,</span><span class="s1">&#39;b_follows_a&#39;</span><span class="p">,</span><span class="s1">&#39;tweet_type&#39;</span><span class="p">,</span><span class="s1">&#39;media&#39;</span><span class="p">,</span><span class="s1">&#39;a_is_verified&#39;</span><span class="p">]]</span> <span class="o">&gt;&gt;</span>
     <span class="n">nvt</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">TargetEncoding</span><span class="p">(</span>
@@ -1091,8 +1055,7 @@ Wed Dec 16 13:39:20 2020
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">output</span> <span class="o">=</span> <span class="n">count_encode</span><span class="o">+</span><span class="n">hour</span><span class="o">+</span><span class="n">minute</span><span class="o">+</span><span class="n">seconds</span><span class="o">+</span><span class="n">diff_lag</span><span class="o">+</span><span class="n">labels</span><span class="o">+</span><span class="n">target_encode</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">count_encode</span><span class="o">+</span><span class="n">hour</span><span class="o">+</span><span class="n">minute</span><span class="o">+</span><span class="n">seconds</span><span class="o">+</span><span class="n">diff_lag</span><span class="o">+</span><span class="n">labels</span><span class="o">+</span><span class="n">target_encode</span>
 <span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="o">.</span><span class="n">graph</span>
 </pre></div>
 </div>
@@ -1109,8 +1072,7 @@ Wed Dec 16 13:39:20 2020
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">cudf</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;/nv_train/part.0.parquet&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">cudf</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;/nv_train/part.0.parquet&#39;</span><span class="p">)</span>
 <span class="n">all_input_columns</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="o">.</span><span class="n">columns</span>
 <span class="k">del</span> <span class="n">df_tmp</span>
 <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
@@ -1130,8 +1092,7 @@ Wed Dec 16 13:39:20 2020
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">remaining_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">all_input_columns</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">columns</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;text_tokens&#39;</span><span class="p">])]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">remaining_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">all_input_columns</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">columns</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;text_tokens&#39;</span><span class="p">])]</span>
 <span class="n">remaining_columns</span>
 </pre></div>
 </div>
@@ -1172,8 +1133,7 @@ Wed Dec 16 13:39:20 2020
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">proc</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">output</span><span class="o">+</span><span class="n">remaining_columns</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proc</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">output</span><span class="o">+</span><span class="n">remaining_columns</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1182,8 +1142,7 @@ Wed Dec 16 13:39:20 2020
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;nv_train/*.parquet&#39;</span><span class="p">),</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;nv_train/*.parquet&#39;</span><span class="p">),</span>
                             <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;parquet&#39;</span><span class="p">,</span>
                             <span class="n">part_size</span><span class="o">=</span><span class="s2">&quot;2GB&quot;</span><span class="p">)</span>
 <span class="n">valid_dataset</span> <span class="o">=</span> <span class="n">nvt</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;nv_valid/*.parquet&#39;</span><span class="p">),</span>
@@ -1197,8 +1156,7 @@ Wed Dec 16 13:39:20 2020
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 
 <span class="n">time_fe_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">proc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">)</span>
@@ -1221,8 +1179,7 @@ Wall time: 1min 6s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">dict_dtypes</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict_dtypes</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;a_is_verified&#39;</span><span class="p">,</span><span class="s1">&#39;b_is_verified&#39;</span><span class="p">,</span><span class="s1">&#39;b_follows_a&#39;</span><span class="p">]:</span>
     <span class="n">dict_dtypes</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span>
 </pre></div>
@@ -1233,8 +1190,7 @@ Wall time: 1min 6s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 
 <span class="n">time_fe_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">proc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">)</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">output_path</span><span class="o">=</span><span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;nv_train_fe/&#39;</span><span class="p">,</span> <span class="n">dtypes</span><span class="o">=</span><span class="n">dict_dtypes</span><span class="p">)</span>
@@ -1269,8 +1225,7 @@ Wall time: 3min 52s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">train</span> <span class="o">=</span> <span class="n">dask_cudf</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;nv_train_fe/*.parquet&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span> <span class="o">=</span> <span class="n">dask_cudf</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;nv_train_fe/*.parquet&#39;</span><span class="p">)</span>
 <span class="n">valid</span> <span class="o">=</span> <span class="n">dask_cudf</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;nv_valid_fe/*.parquet&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1279,8 +1234,7 @@ Wall time: 3min 52s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">train</span><span class="p">[[</span><span class="s1">&#39;a_is_verified&#39;</span><span class="p">,</span><span class="s1">&#39;b_is_verified&#39;</span><span class="p">,</span><span class="s1">&#39;b_follows_a&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">dtypes</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="p">[[</span><span class="s1">&#39;a_is_verified&#39;</span><span class="p">,</span><span class="s1">&#39;b_is_verified&#39;</span><span class="p">,</span><span class="s1">&#39;b_follows_a&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">dtypes</span>
 </pre></div>
 </div>
 </div>
@@ -1301,8 +1255,7 @@ dtype: object
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">dont_use</span> <span class="o">=</span><span class="p">[</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dont_use</span> <span class="o">=</span><span class="p">[</span>
     <span class="s1">&#39;__null_dask_index__&#39;</span><span class="p">,</span>
     <span class="s1">&#39;text_tokens&#39;</span><span class="p">,</span>
     <span class="s1">&#39;timestamp&#39;</span><span class="p">,</span>
@@ -1330,8 +1283,7 @@ dtype: object
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">SAMPLE_RATIO</span> <span class="o">=</span> <span class="mf">0.1</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SAMPLE_RATIO</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="n">SEED</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="k">if</span> <span class="n">SAMPLE_RATIO</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
@@ -1368,8 +1320,7 @@ Using 51 features
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">SAMPLE_RATIO</span> <span class="o">=</span> <span class="mf">0.35</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SAMPLE_RATIO</span> <span class="o">=</span> <span class="mf">0.35</span>
 <span class="n">SEED</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">if</span> <span class="n">SAMPLE_RATIO</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">valid</span><span class="p">))</span>
@@ -1401,8 +1352,7 @@ Using 51 features
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;XGB Version&#39;</span><span class="p">,</span><span class="n">xgb</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;XGB Version&#39;</span><span class="p">,</span><span class="n">xgb</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 
 <span class="n">xgb_parms</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span>
@@ -1429,8 +1379,7 @@ XGB Version 1.3.0-SNAPSHOT
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">train</span><span class="p">,</span><span class="n">valid</span> <span class="o">=</span> <span class="n">dask</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">train</span><span class="p">,</span><span class="n">valid</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="p">,</span><span class="n">valid</span> <span class="o">=</span> <span class="n">dask</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">train</span><span class="p">,</span><span class="n">valid</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1440,8 +1389,7 @@ XGB Version 1.3.0-SNAPSHOT
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 <span class="n">time_train_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
 <span class="n">NROUND</span> <span class="o">=</span> <span class="mi">300</span>
@@ -1611,8 +1559,7 @@ Wall time: 1min 15s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">yvalid</span> <span class="o">=</span> <span class="n">Y_valid</span><span class="p">[</span><span class="n">label_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yvalid</span> <span class="o">=</span> <span class="n">Y_valid</span><span class="p">[</span><span class="n">label_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
 <span class="n">oof</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">preds</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
 </pre></div>
 </div>
@@ -1621,8 +1568,7 @@ Wall time: 1min 15s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">yvalid</span><span class="o">.</span><span class="n">shape</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yvalid</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -1640,8 +1586,7 @@ Wall time: 1min 15s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">auc</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">auc</span>
 
 <span class="k">def</span> <span class="nf">precision_recall_curve</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span><span class="n">y_pred</span><span class="p">):</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">y_true</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
@@ -1705,8 +1650,7 @@ Wall time: 1min 15s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">txt</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">txt</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
     <span class="n">prauc</span> <span class="o">=</span> <span class="n">compute_prauc</span><span class="p">(</span><span class="n">oof</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">yvalid</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
     <span class="n">rce</span>   <span class="o">=</span> <span class="n">compute_rce_fast</span><span class="p">(</span><span class="n">oof</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">yvalid</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
@@ -1731,8 +1675,7 @@ like                 PRAUC:0.75744 RCE:23.85922
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">time_total</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">time_total_start</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_total</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">time_total_start</span>
 </pre></div>
 </div>
 </div>
@@ -1740,8 +1683,7 @@ like                 PRAUC:0.75744 RCE:23.85922
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total time: </span><span class="si">{:.2f}</span><span class="s1">s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time_total</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total time: </span><span class="si">{:.2f}</span><span class="s1">s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time_total</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1. Preprocessing:       </span><span class="si">{:.2f}</span><span class="s1">s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time_preproc</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;2. Splitting:           </span><span class="si">{:.2f}</span><span class="s1">s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time_split</span><span class="p">))</span>
@@ -1794,31 +1736,10 @@ Total time: 749.91s
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     <span class="fa fa-book"> Other Versions</span>
-    v: v0.6.1
+    v: Version(name='v0.6.1', url='01-02-04-Download-Convert-ETL-with-NVTabular-Training-with-XGBoost.html', version='', release='2021', is_released=False)
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">
-    <dl>
-      <dt>Tags</dt>
-      <dd><a href="../../../v0.1.0/index.html">v0.1.0</a></dd>
-      <dd><a href="../../../v0.1.1/index.html">v0.1.1</a></dd>
-      <dd><a href="../../../v0.2.0/index.html">v0.2.0</a></dd>
-      <dd><a href="../../../v0.3.0/index.html">v0.3.0</a></dd>
-      <dd><a href="../../../v0.4.0/index.html">v0.4.0</a></dd>
-      <dd><a href="../../../v0.5.0/index.html">v0.5.0</a></dd>
-      <dd><a href="../../../v0.5.1/index.html">v0.5.1</a></dd>
-      <dd><a href="../../../v0.5.2/index.html">v0.5.2</a></dd>
-      <dd><a href="../../../v0.5.3/index.html">v0.5.3</a></dd>
-      <dd><a href="../../../v0.6.0/index.html">v0.6.0</a></dd>
-      <dd><a href="01-02-04-Download-Convert-ETL-with-NVTabular-Training-with-XGBoost.html">v0.6.1</a></dd>
-      <dd><a href="../../../v0.7.0/index.html">v0.7.0</a></dd>
-      <dd><a href="../../../v0.7.1/index.html">v0.7.1</a></dd>
-      <dd><a href="../../../v0.8.0/index.html">v0.8.0</a></dd>
-    </dl>
-    <dl>
-      <dt>Branches</dt>
-      <dd><a href="../../../main/index.html">main</a></dd>
-    </dl>
   </div>
 </div><script>
       jQuery(function () {

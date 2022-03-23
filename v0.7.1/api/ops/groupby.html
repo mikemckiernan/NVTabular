@@ -3,14 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Groupby &mdash; NVTabular 2021 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <title>Groupby &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -135,8 +133,8 @@
 <div class="section" id="groupby">
 <h1>Groupby<a class="headerlink" href="#groupby" title="Permalink to this headline"></a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="nvtabular.ops.Groupby">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nvtabular.ops.</span></span><span class="sig-name descname"><span class="pre">Groupby</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groupby_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'list'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/ops/groupby.html#Groupby"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.ops.Groupby" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.ops.Groupby">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">nvtabular.ops.</span></code><code class="sig-name descname"><span class="pre">Groupby</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groupby_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'list'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/ops/groupby.html#Groupby"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.ops.Groupby" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="operator.html#nvtabular.ops.operator.Operator" title="nvtabular.ops.operator.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">nvtabular.ops.operator.Operator</span></code></a></p>
 <p>Groupby Transformation</p>
 <p>Locally transform each partition of a Dataset with one or
@@ -175,8 +173,8 @@ also allowed (e.g. “sum”, “count”, “max”, “mean”, etc.).</p></li
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="nvtabular.ops.Groupby.transform">
-<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../columns/selector.html#nvtabular.columns.selector.ColumnSelector" title="nvtabular.columns.selector.ColumnSelector"><span class="pre">nvtabular.columns.selector.ColumnSelector</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.rapids.ai/api/cudf/stable/api_docs/api/cudf.DataFrame.html#cudf.DataFrame" title="(in cudf v21.10)"><span class="pre">cudf.core.dataframe.DataFrame</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.rapids.ai/api/cudf/stable/api_docs/api/cudf.DataFrame.html#cudf.DataFrame" title="(in cudf v21.10)"><span class="pre">cudf.core.dataframe.DataFrame</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/nvtabular/ops/groupby.html#Groupby.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.ops.Groupby.transform" title="Permalink to this definition"></a></dt>
+<dt id="nvtabular.ops.Groupby.transform">
+<code class="sig-name descname"><span class="pre">transform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_selector</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../columns/selector.html#nvtabular.columns.selector.ColumnSelector" title="nvtabular.columns.selector.ColumnSelector"><span class="pre">nvtabular.columns.selector.ColumnSelector</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../../_modules/nvtabular/ops/groupby.html#Groupby.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.ops.Groupby.transform" title="Permalink to this definition"></a></dt>
 <dd><p>Transform the dataframe by applying this operator to the set of input columns</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -226,31 +224,10 @@ also allowed (e.g. “sum”, “count”, “max”, “mean”, etc.).</p></li
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     <span class="fa fa-book"> Other Versions</span>
-    v: v0.7.1
+    v: Version(name='v0.7.1', url='groupby.html', version='', release='2021', is_released=False)
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">
-    <dl>
-      <dt>Tags</dt>
-      <dd><a href="../../../v0.1.0/api/ops/groupby.html">v0.1.0</a></dd>
-      <dd><a href="../../../v0.1.1/api/ops/groupby.html">v0.1.1</a></dd>
-      <dd><a href="../../../v0.2.0/api/ops/groupby.html">v0.2.0</a></dd>
-      <dd><a href="../../../v0.3.0/api/ops/groupby.html">v0.3.0</a></dd>
-      <dd><a href="../../../v0.4.0/index.html">v0.4.0</a></dd>
-      <dd><a href="../../../v0.5.0/index.html">v0.5.0</a></dd>
-      <dd><a href="../../../v0.5.1/index.html">v0.5.1</a></dd>
-      <dd><a href="../../../v0.5.2/index.html">v0.5.2</a></dd>
-      <dd><a href="../../../v0.5.3/api/ops/groupby.html">v0.5.3</a></dd>
-      <dd><a href="../../../v0.6.0/api/ops/groupby.html">v0.6.0</a></dd>
-      <dd><a href="../../../v0.6.1/api/ops/groupby.html">v0.6.1</a></dd>
-      <dd><a href="../../../v0.7.0/api/ops/groupby.html">v0.7.0</a></dd>
-      <dd><a href="groupby.html">v0.7.1</a></dd>
-      <dd><a href="../../../v0.8.0/api/ops/groupby.html">v0.8.0</a></dd>
-    </dl>
-    <dl>
-      <dt>Branches</dt>
-      <dd><a href="../../../main/api/ops/groupby.html">main</a></dd>
-    </dl>
   </div>
 </div><script>
       jQuery(function () {
