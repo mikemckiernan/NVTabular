@@ -3,14 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>nvtabular.workflow.workflow &mdash; NVTabular 2021 documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <title>nvtabular.workflow.workflow &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
@@ -103,12 +101,16 @@
 <span class="kn">from</span> <span class="nn">dask.core</span> <span class="kn">import</span> <span class="n">flatten</span>
 
 <span class="kn">import</span> <span class="nn">nvtabular</span>
-<span class="kn">from</span> <span class="nn">nvtabular.dispatch</span> <span class="kn">import</span> <span class="n">_concat_columns</span>
-<span class="kn">from</span> <span class="nn">nvtabular.graph.graph</span> <span class="kn">import</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">_get_ops_by_type</span>
-<span class="kn">from</span> <span class="nn">nvtabular.io.dataset</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">merlin.core.dispatch</span> <span class="kn">import</span> <span class="n">concat_columns</span><span class="p">,</span> <span class="n">is_list_dtype</span><span class="p">,</span> <span class="n">list_val_dtype</span>
+<span class="kn">from</span> <span class="nn">merlin.core.utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ensure_optimize_dataframe_graph</span><span class="p">,</span>
+    <span class="n">global_dask_client</span><span class="p">,</span>
+    <span class="n">set_client_deprecated</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">merlin.core.worker</span> <span class="kn">import</span> <span class="n">clean_worker_cache</span>
+<span class="kn">from</span> <span class="nn">merlin.dag</span> <span class="kn">import</span> <span class="n">Graph</span>
+<span class="kn">from</span> <span class="nn">merlin.io</span> <span class="kn">import</span> <span class="n">Dataset</span>
 <span class="kn">from</span> <span class="nn">nvtabular.ops</span> <span class="kn">import</span> <span class="n">StatOperator</span>
-<span class="kn">from</span> <span class="nn">nvtabular.utils</span> <span class="kn">import</span> <span class="n">_ensure_optimize_dataframe_graph</span><span class="p">,</span> <span class="n">global_dask_client</span>
-<span class="kn">from</span> <span class="nn">nvtabular.worker</span> <span class="kn">import</span> <span class="n">clean_worker_cache</span>
 <span class="kn">from</span> <span class="nn">nvtabular.workflow.node</span> <span class="kn">import</span> <span class="n">WorkflowNode</span>
 
 <span class="n">LOG</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;nvtabular&quot;</span><span class="p">)</span>
@@ -133,33 +135,23 @@
 <span class="sd">        workflow = nvtabular.Workflow(cat_features + cont_features + &quot;label&quot;)</span>
 
 <span class="sd">        # calculate statistics on the training dataset</span>
-<span class="sd">        workflow.fit(nvtabular.io.Dataset(TRAIN_PATH))</span>
+<span class="sd">        workflow.fit(merlin.io.Dataset(TRAIN_PATH))</span>
 
 <span class="sd">        # transform the training and validation datasets and write out as parquet</span>
-<span class="sd">        workflow.transform(nvtabular.io.Dataset(TRAIN_PATH)).to_parquet(output_path=TRAIN_OUT_PATH)</span>
-<span class="sd">        workflow.transform(nvtabular.io.Dataset(VALID_PATH)).to_parquet(output_path=VALID_OUT_PATH)</span>
+<span class="sd">        workflow.transform(merlin.io.Dataset(TRAIN_PATH)).to_parquet(output_path=TRAIN_OUT_PATH)</span>
+<span class="sd">        workflow.transform(merlin.io.Dataset(VALID_PATH)).to_parquet(output_path=VALID_OUT_PATH)</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    output_node: WorkflowNode</span>
 <span class="sd">        The last node in the graph of operators this workflow should apply</span>
-<span class="sd">    client: distributed.Client, optional</span>
-<span class="sd">        The Dask distributed client to use for multi-gpu processing and multi-node processing</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_node</span><span class="p">:</span> <span class="n">WorkflowNode</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;distributed.Client&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># Deprecate `client`</span>
+        <span class="k">if</span> <span class="n">client</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">set_client_deprecated</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="s2">&quot;Workflow&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">output_node</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
-
-        <span class="c1"># Warn user if there is an unused global</span>
-        <span class="c1"># Dask client available</span>
-        <span class="k">if</span> <span class="n">global_dask_client</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">):</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="s2">&quot;A global dask.distributed client has been detected, but the &quot;</span>
-                <span class="s2">&quot;single-threaded scheduler will be used for execution. Please &quot;</span>
-                <span class="s2">&quot;use the `client` argument to initialize a `Workflow` object &quot;</span>
-                <span class="s2">&quot;with distributed-execution enabled.&quot;</span>
-            <span class="p">)</span>
 
 <div class="viewcode-block" id="Workflow.transform"><a class="viewcode-back" href="../../../api/workflow/workflow.html#nvtabular.workflow.workflow.Workflow.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Transforms the dataset by applying the graph of operators to it. Requires the ``fit``</span>
@@ -177,27 +169,19 @@
 <span class="sd">        -------</span>
 <span class="sd">        Dataset</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_clear_worker_cache</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">output_schema</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">fit_schema</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
-
-        <span class="n">ddf</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">to_ddf</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_columns</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">Dataset</span><span class="p">(</span>
-            <span class="n">_transform_ddf</span><span class="p">(</span><span class="n">ddf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dtypes</span><span class="p">),</span>
-            <span class="n">client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">,</span>
-            <span class="n">cpu</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">cpu</span><span class="p">,</span>
-            <span class="n">base_dataset</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">base_dataset</span><span class="p">,</span>
-            <span class="n">schema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_schema</span><span class="p">,</span>
-        <span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transform_impl</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">fit_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_schema</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">fit_schema</span><span class="p">(</span><span class="n">input_schema</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">construct_schema</span><span class="p">(</span><span class="n">input_schema</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">input_dtypes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">input_dtypes</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">input_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">input_schema</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">output_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -214,6 +198,10 @@
     <span class="k">def</span> <span class="nf">_input_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">_input_columns</span><span class="p">()</span>
 
+    <span class="k">def</span> <span class="nf">remove_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_cols</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">remove_inputs</span><span class="p">(</span><span class="n">input_cols</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
 <div class="viewcode-block" id="Workflow.fit"><a class="viewcode-back" href="../../../api/workflow/workflow.html#nvtabular.workflow.workflow.Workflow.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Workflow&quot;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Calculates statistics for this workflow on the input dataset</span>
 
@@ -224,9 +212,10 @@
 <span class="sd">            data should be the training dataset only.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_clear_worker_cache</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_stats</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">output_schema</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">fit_schema</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">construct_schema</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
 
         <span class="n">ddf</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">to_ddf</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_columns</span><span class="p">())</span>
 
@@ -264,11 +253,12 @@
 
                 <span class="c1"># apply transforms necessary for the inputs to the current column group, ignoring</span>
                 <span class="c1"># the transforms from the statop itself</span>
-                <span class="n">transformed_ddf</span> <span class="o">=</span> <span class="n">_ensure_optimize_dataframe_graph</span><span class="p">(</span>
+                <span class="n">transformed_ddf</span> <span class="o">=</span> <span class="n">ensure_optimize_dataframe_graph</span><span class="p">(</span>
                     <span class="n">ddf</span><span class="o">=</span><span class="n">_transform_ddf</span><span class="p">(</span>
                         <span class="n">ddf</span><span class="p">,</span>
                         <span class="n">workflow_node</span><span class="o">.</span><span class="n">parents_with_dependencies</span><span class="p">,</span>
                         <span class="n">additional_columns</span><span class="o">=</span><span class="n">addl_input_cols</span><span class="p">,</span>
+                        <span class="n">capture_dtypes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                     <span class="p">)</span>
                 <span class="p">)</span>
 
@@ -280,8 +270,9 @@
                     <span class="n">LOG</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Failed to fit operator </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">workflow_node</span><span class="o">.</span><span class="n">op</span><span class="p">)</span>
                     <span class="k">raise</span>
 
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">:</span>
-                <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">stats</span><span class="p">)]</span>
+            <span class="n">dask_client</span> <span class="o">=</span> <span class="n">global_dask_client</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">dask_client</span><span class="p">:</span>
+                <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">dask_client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">stats</span><span class="p">)]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">results</span> <span class="o">=</span> <span class="n">dask</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">stats</span><span class="p">,</span> <span class="n">scheduler</span><span class="o">=</span><span class="s2">&quot;synchronous&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -295,17 +286,11 @@
             <span class="k">for</span> <span class="n">dependencies</span> <span class="ow">in</span> <span class="n">stat_ops</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
                 <span class="n">dependencies</span><span class="o">.</span><span class="n">difference_update</span><span class="p">(</span><span class="n">current_phase</span><span class="p">)</span>
 
-        <span class="c1"># hack: store input/output dtypes here. We should have complete dtype</span>
-        <span class="c1"># information for each operator (like we do for column names), but as</span>
-        <span class="c1"># an interim solution this gets us what we need.</span>
-        <span class="n">input_dtypes</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">to_ddf</span><span class="p">()[</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_columns</span><span class="p">()]</span><span class="o">.</span><span class="n">dtypes</span>
-        <span class="n">output_dtypes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="o">.</span><span class="n">sample_dtypes</span><span class="p">()</span>
+        <span class="c1"># This captures the output dtypes of operators like LambdaOp where</span>
+        <span class="c1"># the dtype can&#39;t be determined without running the transform</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transform_impl</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">capture_dtypes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sample_dtypes</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">construct_schema</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">schema</span><span class="p">,</span> <span class="n">preserve_dtypes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">input_dtypes</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">input_dtypes</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">input_dtypes</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">output_dtypes</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">output_dtypes</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">output_dtypes</span><span class="p">))</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">_zero_output_schemas</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">fit_schema</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Workflow.fit_transform"><a class="viewcode-back" href="../../../api/workflow/workflow.html#nvtabular.workflow.workflow.Workflow.fit_transform">[docs]</a>    <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
@@ -323,6 +308,22 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_transform_impl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">capture_dtypes</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clear_worker_cache</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">output_schema</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">construct_schema</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
+
+        <span class="n">ddf</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">to_ddf</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_columns</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">Dataset</span><span class="p">(</span>
+            <span class="n">_transform_ddf</span><span class="p">(</span>
+                <span class="n">ddf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dtypes</span><span class="p">,</span> <span class="n">capture_dtypes</span><span class="o">=</span><span class="n">capture_dtypes</span>
+            <span class="p">),</span>
+            <span class="n">cpu</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">cpu</span><span class="p">,</span>
+            <span class="n">base_dataset</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">base_dataset</span><span class="p">,</span>
+            <span class="n">schema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_schema</span><span class="p">,</span>
+        <span class="p">)</span>
 
 <div class="viewcode-block" id="Workflow.save"><a class="viewcode-back" href="../../../api/workflow/workflow.html#nvtabular.workflow.workflow.Workflow.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Save this workflow to disk</span>
@@ -430,13 +431,14 @@
 
     <span class="k">def</span> <span class="nf">_clear_worker_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Clear worker caches to be &quot;safe&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">clean_worker_cache</span><span class="p">)</span>
+        <span class="n">dask_client</span> <span class="o">=</span> <span class="n">global_dask_client</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">dask_client</span><span class="p">:</span>
+            <span class="n">dask_client</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">clean_worker_cache</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">clean_worker_cache</span><span class="p">()</span></div>
 
 
-<span class="k">def</span> <span class="nf">_transform_ddf</span><span class="p">(</span><span class="n">ddf</span><span class="p">,</span> <span class="n">workflow_nodes</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">additional_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_transform_ddf</span><span class="p">(</span><span class="n">ddf</span><span class="p">,</span> <span class="n">workflow_nodes</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">additional_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">capture_dtypes</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="c1"># Check if we are only selecting columns (no transforms).</span>
     <span class="c1"># If so, we should perform column selection at the ddf level.</span>
     <span class="c1"># Otherwise, Dask will not push the column selection into the</span>
@@ -468,13 +470,14 @@
         <span class="n">_transform_partition</span><span class="p">,</span>
         <span class="n">workflow_nodes</span><span class="p">,</span>
         <span class="n">additional_columns</span><span class="o">=</span><span class="n">additional_columns</span><span class="p">,</span>
+        <span class="n">capture_dtypes</span><span class="o">=</span><span class="n">capture_dtypes</span><span class="p">,</span>
         <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
         <span class="n">enforce_metadata</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_get_stat_ops</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">_get_ops_by_type</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">StatOperator</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Graph</span><span class="o">.</span><span class="n">get_nodes_by_op_type</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">StatOperator</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_get_unique</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
@@ -482,7 +485,7 @@
     <span class="k">return</span> <span class="nb">list</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">}</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
 
-<span class="k">def</span> <span class="nf">_transform_partition</span><span class="p">(</span><span class="n">root_df</span><span class="p">,</span> <span class="n">workflow_nodes</span><span class="p">,</span> <span class="n">additional_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_transform_partition</span><span class="p">(</span><span class="n">root_df</span><span class="p">,</span> <span class="n">workflow_nodes</span><span class="p">,</span> <span class="n">additional_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">capture_dtypes</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Transforms a single partition by appyling all operators in a WorkflowNode&quot;&quot;&quot;</span>
     <span class="n">output</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -500,13 +503,13 @@
 
             <span class="k">for</span> <span class="n">parent</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">parents_with_dependencies</span><span class="p">:</span>
                 <span class="n">parent_output_cols</span> <span class="o">=</span> <span class="n">_get_unique</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">output_schema</span><span class="o">.</span><span class="n">column_names</span><span class="p">)</span>
-                <span class="n">parent_df</span> <span class="o">=</span> <span class="n">_transform_partition</span><span class="p">(</span><span class="n">root_df</span><span class="p">,</span> <span class="p">[</span><span class="n">parent</span><span class="p">])</span>
+                <span class="n">parent_df</span> <span class="o">=</span> <span class="n">_transform_partition</span><span class="p">(</span><span class="n">root_df</span><span class="p">,</span> <span class="p">[</span><span class="n">parent</span><span class="p">],</span> <span class="n">capture_dtypes</span><span class="o">=</span><span class="n">capture_dtypes</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">input_df</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_df</span><span class="p">):</span>
                     <span class="n">input_df</span> <span class="o">=</span> <span class="n">parent_df</span><span class="p">[</span><span class="n">parent_output_cols</span><span class="p">]</span>
                     <span class="n">seen_columns</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">parent_output_cols</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">new_columns</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">parent_output_cols</span><span class="p">)</span> <span class="o">-</span> <span class="n">seen_columns</span>
-                    <span class="n">input_df</span> <span class="o">=</span> <span class="n">_concat_columns</span><span class="p">([</span><span class="n">input_df</span><span class="p">,</span> <span class="n">parent_df</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">new_columns</span><span class="p">)]])</span>
+                    <span class="n">input_df</span> <span class="o">=</span> <span class="n">concat_columns</span><span class="p">([</span><span class="n">input_df</span><span class="p">,</span> <span class="n">parent_df</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">new_columns</span><span class="p">)]])</span>
                     <span class="n">seen_columns</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_columns</span><span class="p">)</span>
 
             <span class="c1"># Check for additional input columns that aren&#39;t generated by parents</span>
@@ -518,7 +521,7 @@
             <span class="n">addl_input_cols</span> <span class="o">=</span> <span class="n">addl_input_cols</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">input_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">addl_input_cols</span><span class="p">:</span>
-                <span class="n">input_df</span> <span class="o">=</span> <span class="n">_concat_columns</span><span class="p">([</span><span class="n">input_df</span><span class="p">,</span> <span class="n">root_df</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">addl_input_cols</span><span class="p">)]])</span>
+                <span class="n">input_df</span> <span class="o">=</span> <span class="n">concat_columns</span><span class="p">([</span><span class="n">input_df</span><span class="p">,</span> <span class="n">root_df</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">addl_input_cols</span><span class="p">)]])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># If there are no parents, this is an input node,</span>
             <span class="c1"># so pull columns directly from root df</span>
@@ -530,6 +533,30 @@
                 <span class="c1"># use input_columns to ensure correct grouping (subgroups)</span>
                 <span class="n">selection</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">input_columns</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">input_schema</span><span class="p">)</span>
                 <span class="n">output_df</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">input_df</span><span class="p">)</span>
+
+                <span class="c1"># Update or validate output_df dtypes</span>
+                <span class="k">for</span> <span class="n">col_name</span><span class="p">,</span> <span class="n">output_col_schema</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">output_schema</span><span class="o">.</span><span class="n">column_schemas</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">col_series</span> <span class="o">=</span> <span class="n">output_df</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span>
+                    <span class="n">col_dtype</span> <span class="o">=</span> <span class="n">col_series</span><span class="o">.</span><span class="n">dtype</span>
+                    <span class="n">is_list</span> <span class="o">=</span> <span class="n">is_list_dtype</span><span class="p">(</span><span class="n">col_series</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">is_list</span><span class="p">:</span>
+                        <span class="n">col_dtype</span> <span class="o">=</span> <span class="n">list_val_dtype</span><span class="p">(</span><span class="n">col_series</span><span class="p">)</span>
+
+                    <span class="n">output_df_schema</span> <span class="o">=</span> <span class="n">output_col_schema</span><span class="o">.</span><span class="n">with_dtype</span><span class="p">(</span>
+                        <span class="n">col_dtype</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">,</span> <span class="n">is_ragged</span><span class="o">=</span><span class="n">is_list</span>
+                    <span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">capture_dtypes</span><span class="p">:</span>
+                        <span class="n">node</span><span class="o">.</span><span class="n">output_schema</span><span class="o">.</span><span class="n">column_schemas</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_df_schema</span>
+                    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">output_df</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">output_col_schema</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">output_df_schema</span><span class="o">.</span><span class="n">dtype</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                                <span class="sa">f</span><span class="s2">&quot;Dtype discrepancy detected for column </span><span class="si">{</span><span class="n">col_name</span><span class="si">}</span><span class="s2">: &quot;</span>
+                                <span class="sa">f</span><span class="s2">&quot;operator </span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s2"> reported dtype &quot;</span>
+                                <span class="sa">f</span><span class="s2">&quot;`</span><span class="si">{</span><span class="n">output_col_schema</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">` but returned dtype &quot;</span>
+                                <span class="sa">f</span><span class="s2">&quot;`</span><span class="si">{</span><span class="n">output_df_schema</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">`.&quot;</span>
+                            <span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">LOG</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Failed to transform operator </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="p">)</span>
                 <span class="k">raise</span>
@@ -546,10 +573,10 @@
         <span class="k">if</span> <span class="n">output</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="n">output_df</span><span class="p">[</span><span class="n">node_output_cols</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">output</span> <span class="o">=</span> <span class="n">_concat_columns</span><span class="p">([</span><span class="n">output</span><span class="p">,</span> <span class="n">output_df</span><span class="p">[</span><span class="n">node_output_cols</span><span class="p">]])</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">concat_columns</span><span class="p">([</span><span class="n">output</span><span class="p">,</span> <span class="n">output_df</span><span class="p">[</span><span class="n">node_output_cols</span><span class="p">]])</span>
 
     <span class="k">if</span> <span class="n">additional_columns</span><span class="p">:</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">_concat_columns</span><span class="p">([</span><span class="n">output</span><span class="p">,</span> <span class="n">root_df</span><span class="p">[</span><span class="n">_get_unique</span><span class="p">(</span><span class="n">additional_columns</span><span class="p">)]])</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">concat_columns</span><span class="p">([</span><span class="n">output</span><span class="p">,</span> <span class="n">root_df</span><span class="p">[</span><span class="n">_get_unique</span><span class="p">(</span><span class="n">additional_columns</span><span class="p">)]])</span>
 
     <span class="k">return</span> <span class="n">output</span>
 </pre></div>
@@ -584,20 +611,12 @@
   <div class="rst-other-versions">
     <dl>
       <dt>Tags</dt>
-      <dd><a href="../../../../v0.1.0/index.html">v0.1.0</a></dd>
-      <dd><a href="../../../../v0.1.1/index.html">v0.1.1</a></dd>
-      <dd><a href="../../../../v0.2.0/index.html">v0.2.0</a></dd>
-      <dd><a href="../../../../v0.3.0/index.html">v0.3.0</a></dd>
-      <dd><a href="../../../../v0.4.0/index.html">v0.4.0</a></dd>
-      <dd><a href="../../../../v0.5.0/index.html">v0.5.0</a></dd>
-      <dd><a href="../../../../v0.5.1/index.html">v0.5.1</a></dd>
-      <dd><a href="../../../../v0.5.2/index.html">v0.5.2</a></dd>
-      <dd><a href="../../../../v0.5.3/index.html">v0.5.3</a></dd>
-      <dd><a href="../../../../v0.6.0/index.html">v0.6.0</a></dd>
-      <dd><a href="../../../../v0.6.1/index.html">v0.6.1</a></dd>
+      <dd><a href="../../../../v0.10.0/index.html">v0.10.0</a></dd>
+      <dd><a href="../../../../v0.11.0/index.html">v0.11.0</a></dd>
       <dd><a href="../../../../v0.7.0/index.html">v0.7.0</a></dd>
       <dd><a href="../../../../v0.7.1/index.html">v0.7.1</a></dd>
       <dd><a href="../../../../v0.8.0/index.html">v0.8.0</a></dd>
+      <dd><a href="../../../../v0.9.0/index.html">v0.9.0</a></dd>
     </dl>
     <dl>
       <dt>Branches</dt>

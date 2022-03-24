@@ -3,14 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Core Features &mdash; NVTabular 2021 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>Core Features &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -122,7 +120,7 @@
 </div>
 <div class="section" id="hugectr-interoperability">
 <h2>HugeCTR Interoperability<a class="headerlink" href="#hugectr-interoperability" title="Permalink to this headline"></a></h2>
-<p>NVTabular is also capable of preprocessing datasets that can be passed to HugeCTR for training. For additional information, see the <a class="reference external" href="https://nvidia-merlin.github.io/NVTabular/main/examples/scaling-criteo/02-03c-ETL-with-NVTabular-HugeCTR.html">HugeCTR Example Notebook</a> for details about how this works.</p>
+<p>NVTabular is also capable of preprocessing datasets that can be passed to HugeCTR for training. For additional information, see the <a class="reference external" href="https://github.com/NVIDIA-Merlin/NVTabular/blob/main/examples/scaling-criteo/03-Training-with-HugeCTR.ipynb">HugeCTR Example Notebook</a> for details about how this works.</p>
 </div>
 <div class="section" id="multi-gpu-support">
 <h2>Multi-GPU Support<a class="headerlink" href="#multi-gpu-support" title="Permalink to this headline"></a></h2>
@@ -141,7 +139,6 @@
 </div>
 <p>Currently, there are many ways to deploy a “cluster” for Dask. This <a class="reference external" href="https://blog.dask.org/2020/07/23/current-state-of-distributed-dask-clusters">article</a> gives a summary of all the practical options. For a single machine with multiple GPUs, the <code class="docutils literal notranslate"><span class="pre">dask_cuda.LocalCUDACluster</span></code> API is typically the most convenient option.</p>
 <p>Since NVTabular already uses <a class="reference external" href="https://docs.rapids.ai/api/cudf/stable/dask-cudf.html">Dask-CuDF</a> for internal data processing, there are no other requirements for multi-GPU scaling. With that said, the parallel performance can depend strongly on (1) the size of <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> partitions, (2) the shuffling procedure used for data output, and (3) the specific arguments used for both global-statistics and transformation operations. For additional information, see <a class="reference external" href="https://github.com/NVIDIA/NVTabular/blob/main/examples/multi-gpu-toy-example/multi-gpu_dask.ipynb">Multi-GPU</a> for a simple step-by-step example.</p>
-<p>We encourage experimentation with the <a class="reference external" href="https://github.com/NVIDIA/NVTabular/blob/main/examples/scaling-criteo/dlrm_fp32_64k.json">multi-GPU Criteo/DLRM benchmark example</a>.</p>
 </div>
 <div class="section" id="multi-node-support">
 <h2>Multi-Node Support<a class="headerlink" href="#multi-node-support" title="Permalink to this headline"></a></h2>
@@ -217,20 +214,12 @@ columns. Instead we train models with multi-hot embeddings for these features by
   <div class="rst-other-versions">
     <dl>
       <dt>Tags</dt>
-      <dd><a href="../v0.1.0/index.html">v0.1.0</a></dd>
-      <dd><a href="../v0.1.1/index.html">v0.1.1</a></dd>
-      <dd><a href="../v0.2.0/index.html">v0.2.0</a></dd>
-      <dd><a href="../v0.3.0/index.html">v0.3.0</a></dd>
-      <dd><a href="../v0.4.0/core_features.html">v0.4.0</a></dd>
-      <dd><a href="../v0.5.0/core_features.html">v0.5.0</a></dd>
-      <dd><a href="../v0.5.1/core_features.html">v0.5.1</a></dd>
-      <dd><a href="../v0.5.2/core_features.html">v0.5.2</a></dd>
-      <dd><a href="../v0.5.3/core_features.html">v0.5.3</a></dd>
-      <dd><a href="../v0.6.0/core_features.html">v0.6.0</a></dd>
-      <dd><a href="../v0.6.1/core_features.html">v0.6.1</a></dd>
+      <dd><a href="../v0.10.0/core_features.html">v0.10.0</a></dd>
+      <dd><a href="../v0.11.0/core_features.html">v0.11.0</a></dd>
       <dd><a href="../v0.7.0/core_features.html">v0.7.0</a></dd>
       <dd><a href="../v0.7.1/core_features.html">v0.7.1</a></dd>
       <dd><a href="../v0.8.0/core_features.html">v0.8.0</a></dd>
+      <dd><a href="../v0.9.0/core_features.html">v0.9.0</a></dd>
     </dl>
     <dl>
       <dt>Branches</dt>

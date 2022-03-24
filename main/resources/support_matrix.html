@@ -3,14 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NVTabular Support Matrix &mdash; NVTabular 2021 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>NVTabular Support Matrix &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -116,21 +114,27 @@
 <p id="table-1"><span class="raw-html"><p align="center"><b>Table 1: Support matrix for the Merlin Inference (merlin-inference) container</b></p></span></p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 34%" />
-<col style="width: 22%" />
 <col style="width: 19%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 8%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td></td>
-<td><p><strong>Version 0.6</strong></p></td>
 <td><p><strong>Version 21.09</strong></p></td>
 <td><p><strong>Version 21.11</strong></p></td>
+<td><p><strong>Version 21.12</strong></p></td>
+<td><p><strong>Version 22.01</strong></p></td>
+<td><p><strong>Version 22.02</strong></p></td>
+<td><p><strong>Version 22.03</strong></p></td>
 </tr>
-<tr class="row-even"><td colspan="4"><p><strong>DGX</strong></p></td>
+<tr class="row-even"><td colspan="7"><p><strong>DGX</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>DGX System</p></td>
-<td colspan="3"><ul class="simple">
+<td colspan="6"><ul class="simple">
 <li><p>DGX-1</p></li>
 <li><p>DGX-2</p></li>
 <li><p>DGX A100</p></li>
@@ -139,12 +143,12 @@
 </td>
 </tr>
 <tr class="row-even"><td><p>Operating System</p></td>
-<td colspan="3"><p>Ubuntu version 20.04</p></td>
+<td colspan="6"><p>Ubuntu version 20.04</p></td>
 </tr>
-<tr class="row-odd"><td colspan="4"><p><strong>NVIDIA Certified Systems</strong></p></td>
+<tr class="row-odd"><td colspan="7"><p><strong>NVIDIA Certified Systems</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>NVIDIA Driver</p></td>
-<td colspan="3"><p>NVIDIA Driver version 465.19.01 or later is required. However, if you’re
+<td colspan="6"><p>NVIDIA Driver version 465.19.01 or later is required. However, if you’re
 running on Data Center GPUs (formerly Tesla) such as T4, you can use
 any of the following NVIDIA Driver versions:</p>
 <ul class="simple">
@@ -158,7 +162,7 @@ drivers.</p>
 </td>
 </tr>
 <tr class="row-odd"><td><p>GPU Model</p></td>
-<td colspan="3"><ul class="simple">
+<td colspan="6"><ul class="simple">
 <li><p><a class="reference external" href="https://www.nvidia.com/en-us/data-center/ampere-architecture/">NVIDIA Ampere GPU Architecture</a></p></li>
 <li><p><a class="reference external" href="https://www.nvidia.com/en-us/geforce/turing/">Turning</a></p></li>
 <li><p><a class="reference external" href="https://www.nvidia.com/en-us/data-center/volta-gpu-architecture/">Volta</a></p></li>
@@ -166,44 +170,56 @@ drivers.</p>
 </ul>
 </td>
 </tr>
-<tr class="row-even"><td colspan="4"><p><strong>Base Container Image</strong></p></td>
+<tr class="row-even"><td colspan="7"><p><strong>Base Container Image</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>Container Operating System</p></td>
-<td colspan="3"><p>Ubuntu version 20.04</p></td>
+<td colspan="6"><p>Ubuntu version 20.04</p></td>
 </tr>
 <tr class="row-even"><td><p>Base Container</p></td>
-<td colspan="2"><p>Triton version 21.07</p></td>
+<td><p>Triton version 21.07</p></td>
 <td><p>Triton version 21.10</p></td>
+<td><p>Triton version 21.11</p></td>
+<td colspan="2"><p>Triton version 21.12</p></td>
+<td><p>Triton version 22.02</p></td>
 </tr>
 <tr class="row-odd"><td><p>CUDA</p></td>
-<td colspan="2"><p>11.4</p></td>
-<td></td>
+<td colspan="5"><p>11.6</p></td>
+<td><p>11.6.55</p></td>
 </tr>
 <tr class="row-even"><td><p>RMM</p></td>
-<td><p>21.06</p></td>
-<td><p>21.08</p></td>
-<td><p>21.08</p></td>
+<td colspan="3"><p>21.08</p></td>
+<td><p>21.10</p></td>
+<td><p>21.12</p></td>
+<td><p>21.12</p></td>
 </tr>
 <tr class="row-odd"><td><p>cuDF</p></td>
 <td><p>21.06</p></td>
-<td><p>21.08</p></td>
-<td><p>21.08</p></td>
+<td colspan="2"><p>21.08</p></td>
+<td><p>21.10</p></td>
+<td><p>21.12</p></td>
+<td><p>21.12.02</p></td>
 </tr>
 <tr class="row-even"><td><p>cuDNN</p></td>
-<td colspan="3"><p>N/A</p></td>
+<td colspan="6"><p>N/A</p></td>
 </tr>
 <tr class="row-odd"><td><p>HugeCTR</p></td>
-<td><p>3.1</p></td>
 <td><p>3.2</p></td>
 <td><p>3.2.1</p></td>
+<td><p>3.3</p></td>
+<td><p>3.3.1</p></td>
+<td><p>3.4</p></td>
+<td><p>3.4.1</p></td>
 </tr>
 <tr class="row-even"><td><p>NVTabular</p></td>
-<td><p>0.6</p></td>
 <td><p>0.7</p></td>
 <td><p>0.7.1</p></td>
+<td><p>0.8</p></td>
+<td><p>0.9</p></td>
+<td><p>0.10</p></td>
+<td><p>0.11.0</p></td>
 </tr>
 <tr class="row-odd"><td><p>SM</p></td>
-<td colspan="3"><p>60; 61; 70; 75; 80</p></td>
+<td colspan="6"><p>60; 61; 70; 75; 80</p></td>
 </tr>
 </tbody>
 </table>
@@ -211,21 +227,27 @@ drivers.</p>
 <p id="table-2"><span class="raw-html"><p align="center"><b>Table 2: Support matrix for the Merlin Training (merlin-training) container</b></p></span></p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 34%" />
-<col style="width: 22%" />
 <col style="width: 19%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 9%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td></td>
-<td><p><strong>Version 0.6</strong></p></td>
 <td><p><strong>Version 21.09</strong></p></td>
 <td><p><strong>Version 21.11</strong></p></td>
+<td><p><strong>Version 21.12</strong></p></td>
+<td><p><strong>Version 22.01</strong></p></td>
+<td><p><strong>Version 22.02</strong></p></td>
+<td><p><strong>Version 22.03</strong></p></td>
 </tr>
-<tr class="row-even"><td colspan="4"><p><strong>DGX</strong></p></td>
+<tr class="row-even"><td colspan="7"><p><strong>DGX</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>DGX System</p></td>
-<td colspan="3"><ul class="simple">
+<td colspan="6"><ul class="simple">
 <li><p>DGX-1</p></li>
 <li><p>DGX-2</p></li>
 <li><p>DGX A100</p></li>
@@ -234,12 +256,12 @@ drivers.</p>
 </td>
 </tr>
 <tr class="row-even"><td><p>Operating System</p></td>
-<td colspan="3"><p>Ubuntu version 20.04</p></td>
+<td colspan="6"><p>Ubuntu version 20.04</p></td>
 </tr>
-<tr class="row-odd"><td colspan="4"><p><strong>NVIDIA Certified Systems</strong></p></td>
+<tr class="row-odd"><td colspan="7"><p><strong>NVIDIA Certified Systems</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>NVIDIA Driver</p></td>
-<td colspan="3"><p>NVIDIA Driver version 465.19.01 or later is required. However, if you’re
+<td colspan="6"><p>NVIDIA Driver version 465.19.01 or later is required. However, if you’re
 running on Data Center GPUs (formerly Tesla) such as T4, you can use
 any of the following NVIDIA Driver versions:</p>
 <ul class="simple">
@@ -253,7 +275,7 @@ drivers.</p>
 </td>
 </tr>
 <tr class="row-odd"><td><p>GPU Model</p></td>
-<td colspan="3"><ul class="simple">
+<td colspan="6"><ul class="simple">
 <li><p><a class="reference external" href="https://www.nvidia.com/en-us/data-center/ampere-architecture/">NVIDIA Ampere GPU Architecture</a></p></li>
 <li><p><a class="reference external" href="https://www.nvidia.com/en-us/geforce/turing/">Turning</a></p></li>
 <li><p><a class="reference external" href="https://www.nvidia.com/en-us/data-center/volta-gpu-architecture/">Volta</a></p></li>
@@ -261,44 +283,52 @@ drivers.</p>
 </ul>
 </td>
 </tr>
-<tr class="row-even"><td colspan="4"><p><strong>Base Container Image</strong></p></td>
+<tr class="row-even"><td colspan="7"><p><strong>Base Container Image</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>Container Operating System</p></td>
-<td colspan="3"><p>Ubuntu version 20.04</p></td>
+<td colspan="6"><p>Ubuntu version 20.04</p></td>
 </tr>
 <tr class="row-even"><td><p>Base Container</p></td>
-<td colspan="3"><p>N/A</p></td>
+<td colspan="6"><p>N/A</p></td>
 </tr>
 <tr class="row-odd"><td><p>CUDA</p></td>
-<td colspan="3"><p>11.4</p></td>
+<td colspan="5"><p>11.6</p></td>
+<td><p>11.6.55</p></td>
 </tr>
 <tr class="row-even"><td><p>RMM</p></td>
-<td><p>21.06</p></td>
-<td><p>21.08</p></td>
-<td><p>21.08</p></td>
+<td colspan="3"><p>21.08</p></td>
+<td><p>21.10</p></td>
+<td><p>21.12</p></td>
+<td><p>21.12.0a0+31.g0acbd51</p></td>
 </tr>
 <tr class="row-odd"><td><p>cuDF</p></td>
-<td><p>21.06</p></td>
-<td><p>21.08</p></td>
-<td><p>21.08</p></td>
+<td colspan="3"><p>21.08</p></td>
+<td><p>21.10</p></td>
+<td><p>21.12</p></td>
+<td><p>21.12.00a+293.g0930f712e6</p></td>
 </tr>
 <tr class="row-even"><td><p>cuDNN</p></td>
-<td><p>8.2.2</p></td>
-<td><p>8.3.0</p></td>
-<td><p>8.3.0</p></td>
+<td colspan="5"><p>8.3.0</p></td>
+<td><p>8.3.2</p></td>
 </tr>
 <tr class="row-odd"><td><p>HugeCTR</p></td>
-<td><p>3.1</p></td>
 <td><p>3.2</p></td>
 <td><p>3.2.1</p></td>
+<td><p>3.3</p></td>
+<td><p>3.3.1</p></td>
+<td><p>3.4</p></td>
+<td><p>3.4.1</p></td>
 </tr>
 <tr class="row-even"><td><p>NVTabular</p></td>
-<td><p>0.6</p></td>
 <td><p>0.7</p></td>
 <td><p>0.7.1</p></td>
+<td><p>0.8</p></td>
+<td><p>0.9</p></td>
+<td><p>0.10</p></td>
+<td><p>0.11.0</p></td>
 </tr>
 <tr class="row-odd"><td><p>SM</p></td>
-<td colspan="3"><p>60; 61; 70; 75; 80</p></td>
+<td colspan="6"><p>60; 61; 70; 75; 80</p></td>
 </tr>
 </tbody>
 </table>
@@ -306,21 +336,28 @@ drivers.</p>
 <p id="table-3"><span class="raw-html"><p align="center"><b>Table 3: Support matrix for the Merlin TensorFlow Training (merlin-tensorflow-training) container</b></p></span></p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 28%" />
-<col style="width: 28%" />
-<col style="width: 19%" />
+<col style="width: 15%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 6%" />
+<col style="width: 12%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td></td>
-<td><p><strong>Version 0.6</strong></p></td>
 <td><p><strong>Version 21.09</strong></p></td>
 <td><p><strong>Version 21.11</strong></p></td>
+<td><p><strong>Version 21.12</strong></p></td>
+<td><p><strong>Version 22.01</strong></p></td>
+<td><p><strong>Version 22.02</strong></p></td>
+<td><p><strong>Version 22.03</strong></p></td>
 </tr>
-<tr class="row-even"><td colspan="4"><p><strong>DGX</strong></p></td>
+<tr class="row-even"><td colspan="6"><p><strong>DGX</strong></p></td>
+<td></td>
 </tr>
 <tr class="row-odd"><td><p>DGX System</p></td>
-<td colspan="3"><ul class="simple">
+<td colspan="6"><ul class="simple">
 <li><p>DGX-1</p></li>
 <li><p>DGX-2</p></li>
 <li><p>DGX A100</p></li>
@@ -329,12 +366,12 @@ drivers.</p>
 </td>
 </tr>
 <tr class="row-even"><td><p>Operating System</p></td>
-<td colspan="3"><p>Ubuntu version 20.04</p></td>
+<td colspan="6"><p>Ubuntu version 20.04</p></td>
 </tr>
-<tr class="row-odd"><td colspan="4"><p><strong>NVIDIA Certified Systems</strong></p></td>
+<tr class="row-odd"><td colspan="7"><p><strong>NVIDIA Certified Systems</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>NVIDIA Driver</p></td>
-<td colspan="3"><p>NVIDIA Driver version 465.19.01 or later is required. However, if you’re
+<td colspan="6"><p>NVIDIA Driver version 465.19.01 or later is required. However, if you’re
 running on Data Center GPUs (formerly Tesla) such as T4, you can use
 any of the following NVIDIA Driver versions:</p>
 <ul class="simple">
@@ -348,7 +385,7 @@ drivers.</p>
 </td>
 </tr>
 <tr class="row-odd"><td><p>GPU Model</p></td>
-<td colspan="3"><ul class="simple">
+<td colspan="6"><ul class="simple">
 <li><p><a class="reference external" href="https://www.nvidia.com/en-us/data-center/ampere-architecture/">NVIDIA Ampere GPU Architecture</a></p></li>
 <li><p><a class="reference external" href="https://www.nvidia.com/en-us/geforce/turing/">Turning</a></p></li>
 <li><p><a class="reference external" href="https://www.nvidia.com/en-us/data-center/volta-gpu-architecture/">Volta</a></p></li>
@@ -356,46 +393,57 @@ drivers.</p>
 </ul>
 </td>
 </tr>
-<tr class="row-even"><td colspan="4"><p><strong>Base Container Image</strong></p></td>
+<tr class="row-even"><td colspan="7"><p><strong>Base Container Image</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>Container Operating System</p></td>
-<td colspan="3"><p>Ubuntu version 20.04</p></td>
+<td colspan="6"><p>Ubuntu version 20.04</p></td>
 </tr>
 <tr class="row-even"><td><p>Base Container</p></td>
-<td><p><a class="reference external" href="https://nvcr.io/nvidia/pytorch:21.07-py3">nvcr.io/nvidia/tensorflow:21.07-tf2-py3</a></p>
+<td><p>nvcr.io/nvidia/tensorflow:21.07-tf2-py3</p>
 <p>*Customized with TensorFlow version 2.4.2</p>
 </td>
-<td><p><a class="reference external" href="https://nvcr.io/nvidia/pytorch:21.07-py3">nvcr.io/nvidia/tensorflow:21.07-tf2-py3</a></p></td>
 <td><p>nvcr.io/nvidia/tensorflow:21.10-tf2-py3</p></td>
+<td><p>nvcr.io/nvidia/tensorflow:21.11-tf2-py3</p></td>
+<td colspan="2"><p>nvcr.io/nvidia/tensorflow:12.12-tf2-py3</p></td>
+<td><p>nvcr.io/nvidia/tensorflow:22.02-tf2-py3</p></td>
 </tr>
 <tr class="row-odd"><td><p>CUDA</p></td>
-<td colspan="3"><p>11.4</p></td>
+<td colspan="5"><p>11.6</p></td>
+<td><p>11.6.55</p></td>
 </tr>
 <tr class="row-even"><td><p>RMM</p></td>
-<td><p>21.06</p></td>
-<td><p>21.08</p></td>
-<td><p>21.08</p></td>
+<td colspan="3"><p>21.08</p></td>
+<td><p>21.10</p></td>
+<td><p>21.12</p></td>
+<td><p>21.12.0a0+31.g0acbd51</p></td>
 </tr>
 <tr class="row-odd"><td><p>cuDF</p></td>
-<td><p>21.06</p></td>
-<td><p>21.08</p></td>
-<td><p>21.08</p></td>
+<td colspan="3"><p>21.08</p></td>
+<td><p>21.10</p></td>
+<td><p>21.12</p></td>
+<td><p>21.12.0a0+293.g0930f712e6</p></td>
 </tr>
 <tr class="row-even"><td><p>cuDNN</p></td>
-<td colspan="3"><p>N/A</p></td>
+<td colspan="6"><p>N/A</p></td>
 </tr>
 <tr class="row-odd"><td><p>HugeCTR</p></td>
-<td><p>3.1</p></td>
 <td><p>3.2</p></td>
 <td><p>3.2.1</p></td>
+<td><p>3.3</p></td>
+<td><p>3.3.1</p></td>
+<td><p>3.4</p></td>
+<td><p>3.4.1</p></td>
 </tr>
 <tr class="row-even"><td><p>NVTabular</p></td>
-<td><p>0.6</p></td>
 <td><p>0.7</p></td>
 <td><p>0.7.1</p></td>
+<td><p>0.8</p></td>
+<td><p>0.9</p></td>
+<td><p>0.10</p></td>
+<td><p>0.11.0</p></td>
 </tr>
 <tr class="row-odd"><td><p>SM</p></td>
-<td colspan="3"><p>60; 61; 70; 75; 80</p></td>
+<td colspan="6"><p>60; 61; 70; 75; 80</p></td>
 </tr>
 </tbody>
 </table>
@@ -403,21 +451,27 @@ drivers.</p>
 <p id="table-4"><span class="raw-html"><p align="center"><b>Table 4: Support matrix for the Merlin PyTorch Training (merlin-pytorch-training) container</b></p></span></p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 28%" />
-<col style="width: 28%" />
-<col style="width: 19%" />
+<col style="width: 15%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 6%" />
+<col style="width: 11%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td></td>
-<td><p><strong>Version 0.6</strong></p></td>
 <td><p><strong>Version 21.09</strong></p></td>
 <td><p><strong>Version 21.11</strong></p></td>
+<td><p><strong>Version 21.12</strong></p></td>
+<td><p><strong>Version 22.01</strong></p></td>
+<td><p><strong>Version 22.02</strong></p></td>
+<td><p><strong>Version 22.03</strong></p></td>
 </tr>
-<tr class="row-even"><td colspan="4"><p><strong>DGX</strong></p></td>
+<tr class="row-even"><td colspan="7"><p><strong>DGX</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>DGX System</p></td>
-<td colspan="3"><ul class="simple">
+<td colspan="6"><ul class="simple">
 <li><p>DGX-1</p></li>
 <li><p>DGX-2</p></li>
 <li><p>DGX A100</p></li>
@@ -426,12 +480,12 @@ drivers.</p>
 </td>
 </tr>
 <tr class="row-even"><td><p>Operating System</p></td>
-<td colspan="3"><p>Ubuntu version 20.04</p></td>
+<td colspan="6"><p>Ubuntu version 20.04</p></td>
 </tr>
-<tr class="row-odd"><td colspan="4"><p><strong>NVIDIA Certified Systems</strong></p></td>
+<tr class="row-odd"><td colspan="7"><p><strong>NVIDIA Certified Systems</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>NVIDIA Driver</p></td>
-<td colspan="3"><p>NVIDIA Driver version 465.19.01 or later is required. However, if you’re
+<td colspan="6"><p>NVIDIA Driver version 465.19.01 or later is required. However, if you’re
 running on Data Center GPUs (formerly Tesla) such as T4, you can use
 any of the following NVIDIA Driver versions:</p>
 <ul class="simple">
@@ -445,7 +499,7 @@ drivers.</p>
 </td>
 </tr>
 <tr class="row-odd"><td><p>GPU Model</p></td>
-<td colspan="3"><ul class="simple">
+<td colspan="6"><ul class="simple">
 <li><p><a class="reference external" href="https://www.nvidia.com/en-us/data-center/ampere-architecture/">NVIDIA Ampere GPU Architecture</a></p></li>
 <li><p><a class="reference external" href="https://www.nvidia.com/en-us/geforce/turing/">Turning</a></p></li>
 <li><p><a class="reference external" href="https://www.nvidia.com/en-us/data-center/volta-gpu-architecture/">Volta</a></p></li>
@@ -453,41 +507,49 @@ drivers.</p>
 </ul>
 </td>
 </tr>
-<tr class="row-even"><td colspan="4"><p><strong>Base Container Image</strong></p></td>
+<tr class="row-even"><td colspan="7"><p><strong>Base Container Image</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>Container Operating System</p></td>
-<td colspan="3"><p>Ubuntu version 20.04</p></td>
+<td colspan="6"><p>Ubuntu version 20.04</p></td>
 </tr>
 <tr class="row-even"><td><p>Base Container</p></td>
-<td colspan="2"><p><a class="reference external" href="https://nvcr.io/nvidia/pytorch:21.07-py3">nvcr.io/nvidia/pytorch:21.07-py3</a></p></td>
+<td><p>nvcr.io/nvidia/pytorch:21.07-py3</p></td>
 <td><p>nvcr.io/nvidia/pytorch:21.10-py3</p></td>
+<td><p>nvcr.io/nvidia/pytorch:21.11-py3</p></td>
+<td colspan="3"><p>nvcr.io/nvidia/pytorch:21.12-py3</p></td>
 </tr>
 <tr class="row-odd"><td><p>CUDA</p></td>
-<td colspan="3"><p>11.4</p></td>
+<td colspan="5"><p>11.6</p></td>
+<td><p>11.6.55</p></td>
 </tr>
 <tr class="row-even"><td><p>RMM</p></td>
-<td><p>21.06</p></td>
-<td><p>21.08</p></td>
-<td><p>21.08</p></td>
+<td colspan="3"><p>21.08</p></td>
+<td><p>21.10</p></td>
+<td><p>21.12</p></td>
+<td><p>21.12.0a0+31.g0acbd51</p></td>
 </tr>
 <tr class="row-odd"><td><p>cuDF</p></td>
-<td><p>21.06</p></td>
-<td><p>21.08</p></td>
-<td><p>21.08</p></td>
+<td colspan="3"><p>21.08</p></td>
+<td><p>21.10</p></td>
+<td><p>21.12</p></td>
+<td><p>21.12.0a0+293.g0930f712e6</p></td>
 </tr>
 <tr class="row-even"><td><p>cuDNN</p></td>
-<td colspan="3"><p>N/A</p></td>
+<td colspan="6"><p>N/A</p></td>
 </tr>
 <tr class="row-odd"><td><p>HugeCTR</p></td>
-<td colspan="3"><p>N/A</p></td>
+<td colspan="6"><p>N/A</p></td>
 </tr>
 <tr class="row-even"><td><p>NVTabular</p></td>
-<td><p>0.6</p></td>
 <td><p>0.7</p></td>
 <td><p>0.7.1</p></td>
+<td><p>0.8</p></td>
+<td><p>0.9</p></td>
+<td><p>0.10</p></td>
+<td><p>0.11.0</p></td>
 </tr>
 <tr class="row-odd"><td><p>SM</p></td>
-<td colspan="3"><p>60; 61; 70; 75; 80</p></td>
+<td colspan="6"><p>60; 61; 70; 75; 80</p></td>
 </tr>
 </tbody>
 </table>
@@ -527,20 +589,12 @@ drivers.</p>
   <div class="rst-other-versions">
     <dl>
       <dt>Tags</dt>
-      <dd><a href="../../v0.1.0/index.html">v0.1.0</a></dd>
-      <dd><a href="../../v0.1.1/index.html">v0.1.1</a></dd>
-      <dd><a href="../../v0.2.0/index.html">v0.2.0</a></dd>
-      <dd><a href="../../v0.3.0/index.html">v0.3.0</a></dd>
-      <dd><a href="../../v0.4.0/index.html">v0.4.0</a></dd>
-      <dd><a href="../../v0.5.0/index.html">v0.5.0</a></dd>
-      <dd><a href="../../v0.5.1/index.html">v0.5.1</a></dd>
-      <dd><a href="../../v0.5.2/index.html">v0.5.2</a></dd>
-      <dd><a href="../../v0.5.3/index.html">v0.5.3</a></dd>
-      <dd><a href="../../v0.6.0/resources/support_matrix.html">v0.6.0</a></dd>
-      <dd><a href="../../v0.6.1/resources/support_matrix.html">v0.6.1</a></dd>
+      <dd><a href="../../v0.10.0/resources/support_matrix.html">v0.10.0</a></dd>
+      <dd><a href="../../v0.11.0/resources/support_matrix.html">v0.11.0</a></dd>
       <dd><a href="../../v0.7.0/resources/support_matrix.html">v0.7.0</a></dd>
       <dd><a href="../../v0.7.1/resources/support_matrix.html">v0.7.1</a></dd>
       <dd><a href="../../v0.8.0/resources/support_matrix.html">v0.8.0</a></dd>
+      <dd><a href="../../v0.9.0/resources/support_matrix.html">v0.9.0</a></dd>
     </dl>
     <dl>
       <dt>Branches</dt>
