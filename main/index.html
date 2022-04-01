@@ -16,7 +16,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="NVTabular | Documentation" href="Introduction.html" /> 
+    <link rel="next" title="NVTabular" href="Introduction.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -99,6 +99,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Introduction.html#performance">Performance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Introduction.html#installation">Installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="Introduction.html#installing-nvtabular-using-conda">Installing NVTabular Using Conda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Introduction.html#installing-nvtabular-using-pip">Installing NVTabular Using Pip</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Introduction.html#installing-nvtabular-with-docker">Installing NVTabular with Docker</a></li>
 </ul>
 </li>
@@ -175,6 +176,7 @@
 <li class="toctree-l3"><a class="reference internal" href="api/ops/clip.html">Clip</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ops/columnsimilarity.html">ColumnSimilarity</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ops/differencelag.html">DifferenceLag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ops/drop_low_cardinality.html">DropLowCardinality</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ops/dropna.html">Dropna</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ops/fillmissing.html">FillMissing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ops/fillmedian.html">FillMedian</a></li>
@@ -190,15 +192,16 @@
 <li class="toctree-l3"><a class="reference internal" href="api/ops/normalize.html">Normalize</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ops/normalizeminmax.html">NormalizeMinMax</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ops/rename.html">Rename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ops/reduce_dtype_size.html">ReduceDtypeSize</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ops/targetencoding.html">TargetEncoding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ops/operator.html">Operator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ops/stat_operator.html">StatOperator</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/torch_dataloader.html">Torch Dataloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/torch_dataloader.html#torch-layers">Torch Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/torch_dataloader.html#module-nvtabular.framework_utils.torch.layers.embeddings">Torch Layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/tensorflow_dataloader.html">TensorFlow Dataloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/tensorflow_dataloader.html#tensorflow-layers">TensorFlow Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tensorflow_dataloader.html#module-nvtabular.framework_utils.tensorflow.layers.embedding">TensorFlow Layers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="resources/index.html">Additional Resources</a><ul>
@@ -244,7 +247,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Introduction.html" class="btn btn-neutral float-right" title="NVTabular | Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Introduction.html" class="btn btn-neutral float-right" title="NVTabular" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

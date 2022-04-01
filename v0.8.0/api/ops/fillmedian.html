@@ -149,20 +149,6 @@
 </dd>
 </dl>
 <dl class="py method">
-<dt id="nvtabular.ops.FillMedian.fit">
-<code class="sig-name descname"><span class="pre">fit</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_selector</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../graph/selector.html#nvtabular.graph.selector.ColumnSelector" title="nvtabular.graph.selector.ColumnSelector"><span class="pre">nvtabular.graph.selector.ColumnSelector</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddf</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dask.dataframe.core.DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/ops/fill.html#FillMedian.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.ops.FillMedian.fit" title="Permalink to this definition"></a></dt>
-<dd><p>Calculate statistics for this operator, and return a dask future
-to these statistics, which will be computed by the workflow.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="nvtabular.ops.FillMedian.fit_finalize">
-<code class="sig-name descname"><span class="pre">fit_finalize</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dask_stats</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/ops/fill.html#FillMedian.fit_finalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.ops.FillMedian.fit_finalize" title="Permalink to this definition"></a></dt>
-<dd><p>Finalize statistics calculation - the workflow calls this function with
-the computed statistics from the ‘fit’ object’</p>
-</dd></dl>
-
-<dl class="py method">
 <dt id="nvtabular.ops.FillMedian.transform">
 <code class="sig-name descname"><span class="pre">transform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_selector</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../graph/selector.html#nvtabular.graph.selector.ColumnSelector" title="nvtabular.graph.selector.ColumnSelector"><span class="pre">nvtabular.graph.selector.ColumnSelector</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../../_modules/nvtabular/ops/fill.html#FillMedian.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.ops.FillMedian.transform" title="Permalink to this definition"></a></dt>
 <dd><p>Transform the dataframe by applying this operator to the set of input columns</p>
@@ -181,6 +167,35 @@ the computed statistics from the ‘fit’ object’</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt id="nvtabular.ops.FillMedian.fit">
+<code class="sig-name descname"><span class="pre">fit</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_selector</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../graph/selector.html#nvtabular.graph.selector.ColumnSelector" title="nvtabular.graph.selector.ColumnSelector"><span class="pre">nvtabular.graph.selector.ColumnSelector</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddf</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dask.dataframe.core.DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/ops/fill.html#FillMedian.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.ops.FillMedian.fit" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate statistics for this operator, and return a dask future
+to these statistics, which will be computed by the workflow.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nvtabular.ops.FillMedian.fit_finalize">
+<code class="sig-name descname"><span class="pre">fit_finalize</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dask_stats</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/ops/fill.html#FillMedian.fit_finalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.ops.FillMedian.fit_finalize" title="Permalink to this definition"></a></dt>
+<dd><p>Finalize statistics calculation - the workflow calls this function with
+the computed statistics from the ‘fit’ object’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nvtabular.ops.FillMedian.clear">
+<code class="sig-name descname"><span class="pre">clear</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/ops/fill.html#FillMedian.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.ops.FillMedian.clear" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="nvtabular.ops.FillMedian.compute_output_schema">
+<code class="sig-name descname"><span class="pre">compute_output_schema</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_schema</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../graph/schema.html#nvtabular.graph.schema.Schema" title="nvtabular.graph.schema.Schema"><span class="pre">nvtabular.graph.schema.Schema</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_selector</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../graph/selector.html#nvtabular.graph.selector.ColumnSelector" title="nvtabular.graph.selector.ColumnSelector"><span class="pre">nvtabular.graph.selector.ColumnSelector</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../graph/schema.html#nvtabular.graph.schema.Schema" title="nvtabular.graph.schema.Schema"><span class="pre">nvtabular.graph.schema.Schema</span></a><a class="reference internal" href="../../_modules/nvtabular/ops/fill.html#FillMedian.compute_output_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.ops.FillMedian.compute_output_schema" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="nvtabular.ops.FillMedian.output_column_names">
+<code class="sig-name descname"><span class="pre">output_column_names</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_selector</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../graph/selector.html#nvtabular.graph.selector.ColumnSelector" title="nvtabular.graph.selector.ColumnSelector"><span class="pre">nvtabular.graph.selector.ColumnSelector</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../graph/selector.html#nvtabular.graph.selector.ColumnSelector" title="nvtabular.graph.selector.ColumnSelector"><span class="pre">nvtabular.graph.selector.ColumnSelector</span></a><a class="reference internal" href="../../_modules/nvtabular/ops/fill.html#FillMedian.output_column_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.ops.FillMedian.output_column_names" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
