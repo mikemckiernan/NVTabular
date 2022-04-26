@@ -1,10 +1,10 @@
 Merlin NVTabular
 ================
 
-Merlin NVTabular is an open source library that accelerates recommender
-systems on NVIDIA GPUs.
+The Merlin NVTabular library provides feature engineering and preprocessing for tabular data.
+The library enables you to manipulate datasets easily for training deep-learning recommender systems.
 
-For more information, see the `Introduction <README.html>`_.
+To learn more, start with the `Introduction <Introduction.html>`_.
 
 Related Resources
 -----------------
@@ -21,9 +21,8 @@ Developer website for Merlin
   More information about Merlin is available at our developer website:
   `<https://developer.nvidia.com/nvidia-merlin>`_.
 
-
-Indices and tables
-==================
+Index
+-----
 
 * :ref:`genindex`
 * :ref:`modindex`
