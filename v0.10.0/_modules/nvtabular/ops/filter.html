@@ -91,12 +91,12 @@
 <span class="c1">#</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">from</span> <span class="nn">nvtabular.dispatch</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span> <span class="nn">merlin.core.dispatch</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">DataFrameType</span><span class="p">,</span>
     <span class="n">SeriesType</span><span class="p">,</span>
-    <span class="n">_is_dataframe_object</span><span class="p">,</span>
-    <span class="n">_is_series_object</span><span class="p">,</span>
     <span class="n">annotate</span><span class="p">,</span>
+    <span class="n">is_dataframe_object</span><span class="p">,</span>
+    <span class="n">is_series_object</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">.operator</span> <span class="kn">import</span> <span class="n">ColumnSelector</span><span class="p">,</span> <span class="n">Operator</span>
@@ -128,9 +128,9 @@
 <div class="viewcode-block" id="Filter.transform"><a class="viewcode-back" href="../../../api/ops/filter.html#nvtabular.ops.Filter.transform">[docs]</a>    <span class="nd">@annotate</span><span class="p">(</span><span class="s2">&quot;Filter_op&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkgreen&quot;</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="s2">&quot;nvt_python&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col_selector</span><span class="p">:</span> <span class="n">ColumnSelector</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrameType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrameType</span><span class="p">:</span>
         <span class="n">filtered</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">_is_dataframe_object</span><span class="p">(</span><span class="n">filtered</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">is_dataframe_object</span><span class="p">(</span><span class="n">filtered</span><span class="p">):</span>
             <span class="n">new_df</span> <span class="o">=</span> <span class="n">filtered</span>
-        <span class="k">elif</span> <span class="n">_is_series_object</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span> <span class="ow">and</span> <span class="n">filtered</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">is_series_object</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span> <span class="ow">and</span> <span class="n">filtered</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">:</span>
             <span class="n">new_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">filtered</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid output from filter op: f</span><span class="si">{</span><span class="n">filtered</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>

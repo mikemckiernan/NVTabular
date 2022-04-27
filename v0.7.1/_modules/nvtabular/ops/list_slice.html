@@ -97,9 +97,9 @@
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="n">cp</span> <span class="o">=</span> <span class="kc">None</span>
 
-<span class="kn">from</span> <span class="nn">nvtabular.dispatch</span> <span class="kn">import</span> <span class="n">DataFrameType</span><span class="p">,</span> <span class="n">_build_cudf_list_column</span><span class="p">,</span> <span class="n">_is_cpu_object</span><span class="p">,</span> <span class="n">annotate</span>
+<span class="kn">from</span> <span class="nn">merlin.core.dispatch</span> <span class="kn">import</span> <span class="n">DataFrameType</span><span class="p">,</span> <span class="n">annotate</span><span class="p">,</span> <span class="n">build_cudf_list_column</span><span class="p">,</span> <span class="n">is_cpu_object</span>
+<span class="kn">from</span> <span class="nn">merlin.schema</span> <span class="kn">import</span> <span class="n">Tags</span>
 
-<span class="kn">from</span> <span class="nn">..tags</span> <span class="kn">import</span> <span class="n">Tags</span>
 <span class="kn">from</span> <span class="nn">.operator</span> <span class="kn">import</span> <span class="n">ColumnSelector</span><span class="p">,</span> <span class="n">Operator</span>
 
 
@@ -118,12 +118,26 @@
 <span class="sd">    Take the last 10 items from each row::</span>
 
 <span class="sd">        truncated = column_names &gt;&gt; ops.ListSlice(-10)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    -----------</span>
+<span class="sd">    start: int</span>
+<span class="sd">        The starting value to slice from if end isn&#39;t given, otherwise the end value to slice to</span>
+<span class="sd">    end: int, optional</span>
+<span class="sd">        The end value to slice to</span>
+<span class="sd">    pad: bool, default False</span>
+<span class="sd">        Whether to pad out rows to have the same number of elements. If not set rows may not all</span>
+<span class="sd">        have the same number of entries.</span>
+<span class="sd">    pad_value: float</span>
+<span class="sd">        When pad=True, this is the value used to pad missing entries</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">pad_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pad</span> <span class="o">=</span> <span class="n">pad</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pad_value</span> <span class="o">=</span> <span class="n">pad_value</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span>
@@ -132,43 +146,71 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">max</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_elements</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_elements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span>
+
 <div class="viewcode-block" id="ListSlice.transform"><a class="viewcode-back" href="../../../api/ops/listslice.html#nvtabular.ops.ListSlice.transform">[docs]</a>    <span class="nd">@annotate</span><span class="p">(</span><span class="s2">&quot;ListSlice_op&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkgreen&quot;</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="s2">&quot;nvt_python&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col_selector</span><span class="p">:</span> <span class="n">ColumnSelector</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrameType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrameType</span><span class="p">:</span>
-        <span class="n">on_cpu</span> <span class="o">=</span> <span class="n">_is_cpu_object</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">on_cpu</span> <span class="o">=</span> <span class="n">is_cpu_object</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">)()</span>
+
         <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">col_selector</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
             <span class="c1"># handle CPU via normal python slicing (not very efficient)</span>
             <span class="k">if</span> <span class="n">on_cpu</span><span class="p">:</span>
-                <span class="n">ret</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]]</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]]</span>
+
+                <span class="c1"># pad out to so each row has self.max_elements if asked</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_elements</span><span class="p">:</span>
+                            <span class="n">v</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">pad_value</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_elements</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
+
+                <span class="n">ret</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># figure out the size of each row from the list offsets</span>
                 <span class="n">c</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">_column</span>
                 <span class="n">offsets</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">values</span>
                 <span class="n">elements</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">elements</span><span class="o">.</span><span class="n">values</span>
 
-                <span class="c1"># figure out the size of each row after slicing start/end</span>
-                <span class="n">new_offsets</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">offsets</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">offsets</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
                 <span class="n">threads</span> <span class="o">=</span> <span class="mi">32</span>
                 <span class="n">blocks</span> <span class="o">=</span> <span class="p">(</span><span class="n">offsets</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="n">threads</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">threads</span>
 
-                <span class="c1"># calculate new row offsets after slicing</span>
-                <span class="n">_calculate_row_sizes</span><span class="p">[</span><span class="n">blocks</span><span class="p">,</span> <span class="n">threads</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">offsets</span><span class="p">,</span> <span class="n">new_offsets</span><span class="p">)</span>
-                <span class="n">new_offsets</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">new_offsets</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">offsets</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad</span><span class="p">:</span>
+                    <span class="n">new_offsets</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">offsets</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">offsets</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_elements</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># figure out the size of each row after slicing start/end</span>
+                    <span class="n">new_offsets</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">offsets</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">offsets</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+                    <span class="c1"># calculate new row offsets after slicing</span>
+                    <span class="n">_calculate_row_sizes</span><span class="p">[</span><span class="n">blocks</span><span class="p">,</span> <span class="n">threads</span><span class="p">](</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">offsets</span><span class="p">,</span> <span class="n">new_offsets</span>
+                    <span class="p">)</span>
+                    <span class="n">new_offsets</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">new_offsets</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">offsets</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 
                 <span class="c1"># create a new array for the sliced elements</span>
-                <span class="n">new_elements</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">new_offsets</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">elements</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+                <span class="n">new_elements</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">full</span><span class="p">(</span>
+                    <span class="n">new_offsets</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pad_value</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">elements</span><span class="o">.</span><span class="n">dtype</span>
+                <span class="p">)</span>
                 <span class="k">if</span> <span class="n">new_elements</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
                     <span class="n">_slice_rows</span><span class="p">[</span><span class="n">blocks</span><span class="p">,</span> <span class="n">threads</span><span class="p">](</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">offsets</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">new_offsets</span><span class="p">,</span> <span class="n">new_elements</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">offsets</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">new_offsets</span><span class="p">,</span> <span class="n">new_elements</span>
                     <span class="p">)</span>
 
                 <span class="c1"># build up a list column with the sliced values</span>
-                <span class="n">ret</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">_build_cudf_list_column</span><span class="p">(</span><span class="n">new_elements</span><span class="p">,</span> <span class="n">new_offsets</span><span class="p">)</span>
+                <span class="n">ret</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">build_cudf_list_column</span><span class="p">(</span><span class="n">new_elements</span><span class="p">,</span> <span class="n">new_offsets</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">ret</span></div>
 
-<div class="viewcode-block" id="ListSlice.output_tags"><a class="viewcode-back" href="../../../api/ops/listslice.html#nvtabular.ops.ListSlice.output_tags">[docs]</a>    <span class="k">def</span> <span class="nf">output_tags</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">Tags</span><span class="o">.</span><span class="n">LIST</span><span class="p">]</span></div>
+    <span class="k">def</span> <span class="nf">_compute_dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col_schema</span><span class="p">,</span> <span class="n">input_schema</span><span class="p">):</span>
+        <span class="n">col_schema</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_compute_dtype</span><span class="p">(</span><span class="n">col_schema</span><span class="p">,</span> <span class="n">input_schema</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">col_schema</span><span class="o">.</span><span class="n">with_dtype</span><span class="p">(</span><span class="n">col_schema</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_ragged</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">output_tags</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">Tags</span><span class="o">.</span><span class="n">LIST</span><span class="p">]</span>
 
     <span class="n">transform</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">Operator</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="vm">__doc__</span></div>
 
@@ -195,7 +237,7 @@
 
 
 <span class="nd">@numba</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">jit</span>
-<span class="k">def</span> <span class="nf">_slice_rows</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">offsets</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">new_offsets</span><span class="p">,</span> <span class="n">new_elements</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_slice_rows</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">offsets</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">new_offsets</span><span class="p">,</span> <span class="n">new_elements</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;slices rows of a list column. requires the &#39;new_offsets&#39; to</span>
 <span class="sd">    be previously calculated (meaning that we don&#39;t need the &#39;end&#39; slice index</span>
 <span class="sd">    since that&#39;s baked into the new_offsets&quot;&quot;&quot;</span>
@@ -208,7 +250,18 @@
             <span class="k">if</span> <span class="n">offset</span> <span class="o">&lt;</span> <span class="n">offsets</span><span class="p">[</span><span class="n">rowid</span><span class="p">]:</span>
                 <span class="n">offset</span> <span class="o">=</span> <span class="n">offsets</span><span class="p">[</span><span class="n">rowid</span><span class="p">]</span>
 
-        <span class="k">for</span> <span class="n">new_offset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">new_offsets</span><span class="p">[</span><span class="n">rowid</span><span class="p">],</span> <span class="n">new_offsets</span><span class="p">[</span><span class="n">rowid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]):</span>
+        <span class="n">new_start</span> <span class="o">=</span> <span class="n">new_offsets</span><span class="p">[</span><span class="n">rowid</span><span class="p">]</span>
+        <span class="n">new_end</span> <span class="o">=</span> <span class="n">new_offsets</span><span class="p">[</span><span class="n">rowid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># if we are padding (more new offsets than old offsets) - don&#39;t keep on iterating past</span>
+        <span class="c1"># the end</span>
+        <span class="n">offset_delta</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_end</span> <span class="o">-</span> <span class="n">new_start</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">offsets</span><span class="p">[</span><span class="n">rowid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">offset</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">offset_delta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">new_end</span> <span class="o">-=</span> <span class="n">offset_delta</span>
+        <span class="k">elif</span> <span class="n">offset_delta</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">end</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">new_end</span> <span class="o">+=</span> <span class="n">end</span>
+
+        <span class="k">for</span> <span class="n">new_offset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">new_start</span><span class="p">,</span> <span class="n">new_end</span><span class="p">):</span>
             <span class="n">new_elements</span><span class="p">[</span><span class="n">new_offset</span><span class="p">]</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[</span><span class="n">offset</span><span class="p">]</span>
             <span class="n">offset</span> <span class="o">+=</span> <span class="mi">1</span>
 </pre></div>
