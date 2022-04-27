@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nvtabular.ops.data_stats &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/mystnb.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script >let toggleHintShow = 'Click to show';</script>
+        <script >let toggleHintHide = 'Click to hide';</script>
+        <script >let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> NVTabular
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_features.html">Core Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training/index.html">Accelerated Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Example Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/index.html">Additional Resources</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">NVTabular</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>nvtabular.ops.data_stats</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nvtabular.ops.data_stats</h1><div class="highlight"><pre>
+<span></span><span class="c1">#</span>
+<span class="c1"># Copyright (c) 2021, NVIDIA CORPORATION.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">dask.dataframe</span> <span class="k">as</span> <span class="nn">dd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">merlin.core.dispatch</span> <span class="kn">import</span> <span class="n">DataFrameType</span><span class="p">,</span> <span class="n">annotate</span>
+
+<span class="kn">from</span> <span class="nn">.moments</span> <span class="kn">import</span> <span class="n">_custom_moments</span>
+<span class="kn">from</span> <span class="nn">.operator</span> <span class="kn">import</span> <span class="n">ColumnSelector</span><span class="p">,</span> <span class="n">Operator</span>
+<span class="kn">from</span> <span class="nn">.stat_operator</span> <span class="kn">import</span> <span class="n">StatOperator</span>
+
+
+<div class="viewcode-block" id="DataStats"><a class="viewcode-back" href="../../../generated/nvtabular.ops.DataStats.html#nvtabular.ops.DataStats">[docs]</a><span class="k">class</span> <span class="nc">DataStats</span><span class="p">(</span><span class="n">StatOperator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;DataStats calculates statistics for each column in a Dataset</span>
+
+<span class="sd">    Calculates statistics for each column, including things like:</span>
+<span class="sd">     * the min and max value</span>
+<span class="sd">     * the standard deviation and the mean</span>
+<span class="sd">     * The cardinality for categorical columns</span>
+<span class="sd">     * The percentage of columns with missing values</span>
+
+<span class="sd">    These statistics can be used to create synthetic datasets with the same properties</span>
+<span class="sd">    as a real dataset.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    nvtabular.tools.data_gen.DatasetGen</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DataStats.__init__"><a class="viewcode-back" href="../../../generated/nvtabular.ops.DataStats.html#nvtabular.ops.DataStats.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">col_names</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">col_types</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">col_dtypes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="p">{}</span></div>
+
+<div class="viewcode-block" id="DataStats.transform"><a class="viewcode-back" href="../../../generated/nvtabular.ops.DataStats.html#nvtabular.ops.DataStats.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col_selector</span><span class="p">:</span> <span class="n">ColumnSelector</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">DataFrameType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrameType</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">df</span></div>
+
+<div class="viewcode-block" id="DataStats.fit"><a class="viewcode-back" href="../../../generated/nvtabular.ops.DataStats.html#nvtabular.ops.DataStats.fit">[docs]</a>    <span class="nd">@annotate</span><span class="p">(</span><span class="s2">&quot;DataStats_fit&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="s2">&quot;nvt_python&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col_selector</span><span class="p">:</span> <span class="n">ColumnSelector</span><span class="p">,</span> <span class="n">ddf</span><span class="p">:</span> <span class="n">dd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="n">dask_stats</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">ddf_dtypes</span> <span class="o">=</span> <span class="n">ddf</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># For each column, calculate the stats</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">col_selector</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+            <span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">col_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+            <span class="c1"># Get dtype for all</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="n">ddf_dtypes</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">col_dtypes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+
+            <span class="c1"># Identify column type</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">):</span>
+                <span class="n">col_type</span> <span class="o">=</span> <span class="s2">&quot;conts&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">col_type</span> <span class="o">=</span> <span class="s2">&quot;cats&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">col_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col_type</span><span class="p">)</span>
+
+            <span class="c1"># Get cardinality for cats</span>
+            <span class="k">if</span> <span class="n">col_type</span> <span class="o">!=</span> <span class="s2">&quot;conts&quot;</span><span class="p">:</span>
+                <span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;cardinality&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ddf</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+
+            <span class="c1"># if string, replace string for their lengths for the rest of the computations</span>
+            <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="s2">&quot;object&quot;</span><span class="p">:</span>
+                <span class="n">ddf</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">ddf</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">map_partitions</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">(),</span> <span class="n">meta</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span>
+            <span class="c1"># Add list support when cudf supports it:</span>
+            <span class="c1"># https://github.com/rapidsai/cudf/issues/7157</span>
+            <span class="c1"># elif col_type == &quot;cat_mh&quot;:</span>
+            <span class="c1">#    ddf[col] = ddf[col].map_partitions(lambda x: x.list.len())</span>
+
+            <span class="c1"># Get min,max, and mean</span>
+            <span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;min&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ddf</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+            <span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;max&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ddf</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+            <span class="c1"># Get Percentage of NaNs for all</span>
+            <span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;per_nan&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ddf</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">ddf</span><span class="p">[</span><span class="n">col</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="n">dask_stats</span><span class="p">,</span> <span class="n">_custom_moments</span><span class="p">(</span><span class="n">ddf</span><span class="p">[</span><span class="n">col_selector</span><span class="o">.</span><span class="n">names</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="DataStats.fit_finalize"><a class="viewcode-back" href="../../../generated/nvtabular.ops.DataStats.html#nvtabular.ops.DataStats.fit_finalize">[docs]</a>    <span class="k">def</span> <span class="nf">fit_finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stats</span><span class="p">):</span>
+        <span class="n">dask_stats</span><span class="p">,</span> <span class="n">moments</span> <span class="o">=</span> <span class="n">stats</span>
+
+        <span class="c1"># merge in mean/std from the custom_moments code</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">moments</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+            <span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;mean&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">moments</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;std&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">moments</span><span class="p">[</span><span class="s2">&quot;std&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">col_names</span><span class="p">):</span>
+            <span class="c1"># Add dtype</span>
+            <span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;dtype&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">col_dtypes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="c1"># Cast types for yaml</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;per_nan&quot;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">):</span>
+                <span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;per_nan&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;per_nan&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">col_types</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;conts&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;std&quot;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">):</span>
+                    <span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;std&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;std&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;cardinality&quot;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">):</span>
+                    <span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;cardinality&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dask_stats</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="s2">&quot;cardinality&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">dask_stats</span></div>
+
+<div class="viewcode-block" id="DataStats.clear"><a class="viewcode-back" href="../../../generated/nvtabular.ops.DataStats.html#nvtabular.ops.DataStats.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="p">{}</span></div>
+
+    <span class="n">transform</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">Operator</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="n">fit</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">StatOperator</span><span class="o">.</span><span class="n">fit</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="n">fit_finalize</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">StatOperator</span><span class="o">.</span><span class="n">fit_finalize</span><span class="o">.</span><span class="vm">__doc__</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, NVIDIA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: main
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Tags</dt>
+      <dd><a href="../../../../v0.10.0/index.html">v0.10.0</a></dd>
+      <dd><a href="../../../../v0.11.0/index.html">v0.11.0</a></dd>
+      <dd><a href="../../../../v0.7.1/index.html">v0.7.1</a></dd>
+      <dd><a href="../../../../v0.8.0/index.html">v0.8.0</a></dd>
+      <dd><a href="../../../../v0.9.0/index.html">v0.9.0</a></dd>
+      <dd><a href="../../../../v1.0.0/index.html">v1.0.0</a></dd>
+    </dl>
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="data_stats.html">main</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
