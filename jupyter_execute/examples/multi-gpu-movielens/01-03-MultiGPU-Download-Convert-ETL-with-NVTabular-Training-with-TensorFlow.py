@@ -22,15 +22,15 @@
 
 # <img src="http://developer.download.nvidia.com/compute/machine-learning/frameworks/nvidia_logo.png" style="width: 90px; float: right;">
 # 
-# # Multi-GPU with MovieLens: ETL and Training 
+# # Multi-GPU Training with TensorFlow on MovieLens
 # 
 # ## Overview
 # 
 # NVIDIA Merlin is a open source framework to accelerate and scale end-to-end recommender system pipelines on GPU. In this notebook, we use NVTabular, Merlin’s ETL component, to scale feature engineering and pre-processing to multiple GPUs and then perform data-parallel distributed training of a neural network on multiple GPUs with TensorFlow, [Horovod](https://horovod.readthedocs.io/en/stable/), and [NCCL](https://developer.nvidia.com/nccl).
 # 
 # The pre-requisites for this notebook are to be familiar with NVTabular and its API:
-# - You can read more about NVTabular, its API and specialized dataloaders in [Getting Started with Movielens notebooks](../getting-started-movielens).
-# - You can read more about scaling NVTabular ETL in [Scaling Criteo notebooks](../scaling-criteo).
+# - You can read more about NVTabular, its API and specialized dataloaders in [Getting Started with Movielens notebooks](https://nvidia-merlin.github.io/NVTabular/main/examples/getting-started-movielens/index.html).
+# - You can read more about scaling NVTabular ETL in [Scaling Criteo notebooks](https://nvidia-merlin.github.io/NVTabular/main/examples/scaling-criteo/index.html).
 # 
 # **In this notebook, we will focus only on the new information related to multi-GPU training, so please check out the other notebooks first (if you haven’t already.)**
 # 
@@ -352,10 +352,4 @@ get_ipython().run_cell_magic('writefile', "'./hvd_wrapper.sh'", '\n#!/bin/bash\n
 
 
 get_ipython().system('horovodrun -np 2 sh hvd_wrapper.sh python tf_trainer.py --dir_in $BASE_DIR --batch_size 16384')
-
-
-# In[ ]:
-
-
-
 

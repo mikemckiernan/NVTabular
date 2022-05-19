@@ -125,7 +125,7 @@ get_ipython().system('tree /model')
 # In[2]:
 
 
-get_ipython().run_cell_magic('writefile', "'/model/ps.json'", '\n{\n    "supportlonglong": true,\n    "models": [\n        {\n            "model": "criteo",\n            "sparse_files": ["/model/criteo/1/0_sparse_9600.model"],\n            "dense_file": "/model/criteo/1/_dense_9600.model",\n            "network_file": "/model/criteo/1/criteo.json"\n            "max_batch_size": "64",\n            "gpucache":"true",\n            "hit_rate_threshold":"0.9",\n            "gpucacheper":"0.5",\n            "num_of_worker_buffer_in_pool": "4",\n            "num_of_refresher_buffer_in_pool":"1",\n            "cache_refresh_percentage_per_iteration":0.2,\n            "deployed_device_list":["0"],\n            "default_value_for_each_table":["0.0","0.0"]\n        }\n    ]\n}\n')
+get_ipython().run_cell_magic('writefile', "'/model/ps.json'", '\n{\n    "supportlonglong": true,\n    "models": [\n        {\n            "model": "criteo",\n            "sparse_files": ["/model/criteo/1/0_sparse_9600.model"],\n            "dense_file": "/model/criteo/1/_dense_9600.model",\n            "network_file": "/model/criteo/1/criteo.json",\n            "max_batch_size": "64",\n            "gpucache": "true",\n            "hit_rate_threshold": "0.9",\n            "gpucacheper": "0.5",\n            "num_of_worker_buffer_in_pool": "4",\n            "num_of_refresher_buffer_in_pool": "1",\n            "cache_refresh_percentage_per_iteration": 0.2,\n            "deployed_device_list": ["0"],\n            "default_value_for_each_table": ["0.0", "0.0"],\n        }\n    ],\n}\n')
 
 
 # ### Loading Ensemble Model with Triton Inference Server

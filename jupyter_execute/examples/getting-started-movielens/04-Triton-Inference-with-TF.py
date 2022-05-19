@@ -22,7 +22,7 @@
 
 # <img src="http://developer.download.nvidia.com/compute/machine-learning/frameworks/nvidia_logo.png" style="width: 90px; float: right;">
 # 
-# ## Overview
+# # Getting Started MovieLens: Serving a TensorFlow Model
 # The last step is to deploy the ETL workflow and saved model to production. In the production setting, we want to transform the input data as done during training ETL. We need to apply the same mean/std for continuous features and use the same categorical mapping to convert the categories to continuous integers before we use the deep learning model for a prediction. Therefore, we deploy the NVTabular workflow with the TensorFlow model as an ensemble model to Triton Inference. The ensemble model guarantees that the same transformation are applied to the raw inputs.
 
 # <center><img src="./imgs/triton-tf.png" width="300" height="200"></center>
@@ -38,7 +38,7 @@
 # Before we get started, you should launch the Triton Inference Server docker container with the following script. This script will mount your local `model-repository` folder that includes your saved models from the previous notebook (`03a-Training-with-TF.ipynb`) to `/model` directory in the `merlin-inference` docker container.
 
 # ```
-# docker run -it --gpus device=0 -p 8000:8000 -p 8001:8001 -p 8002:8002 -v ${PWD}:/model/ nvcr.io/nvidia/merlin/merlin-inference:21.11
+# docker run -it --gpus device=0 -p 8000:8000 -p 8001:8001 -p 8002:8002 -v ${PWD}:/model/ nvcr.io/nvidia/merlin/merlin-tensorflow-inference:22.04
 # ```
 # 
 
@@ -152,7 +152,7 @@ get_ipython().run_cell_magic('time', '', '\ntriton_client.load_model(model_name=
 #         model.savedmodel/
 #            <saved-model files>
 # ```
-# Let's check out our model repository layout. You can install tree library with apt-get install tree, and then run `!tree /model/models/` to print out the model repository layout as below:
+# Let's check out our model repository layout. You can install tree library with `apt-get install tree`, and then run `!tree /model/models/` to print out the model repository layout as below:
 #                
 # ```
 # /model/models/

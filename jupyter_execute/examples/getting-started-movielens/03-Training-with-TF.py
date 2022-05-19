@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 # Copyright 2021 NVIDIA Corporation. All Rights Reserved.
@@ -131,10 +131,6 @@ import os
 import time
 import tensorflow as tf
 
-# we can control how much memory to give tensorflow with this environment variable
-# IMPORTANT: make sure you do this before you initialize TF's runtime, otherwise
-# TF will have claimed all free GPU memory
-os.environ["TF_MEMORY_ALLOCATION"] = "0.7"  # fraction of free memory
 from nvtabular.loader.tensorflow import KerasSequenceLoader, KerasSequenceValidater
 from nvtabular.framework_utils.tensorflow import layers
 
@@ -343,9 +339,9 @@ MODEL_PATH = os.environ.get("MODEL_PATH", os.path.join(MODEL_BASE_DIR, "models")
 
 
 # Creates an ensemble triton server model, where
-#   model: The tensorflow model that should be served
-#   workflow: The nvtabular workflow used in preprocessing
-#   name: The base name of the various triton models
+#  model: The tensorflow model that should be served
+#  workflow: The nvtabular workflow used in preprocessing
+#  name: The base name of the various triton models
 
 from nvtabular.inference.triton import export_tensorflow_ensemble
 export_tensorflow_ensemble(model, workflow, MODEL_NAME_ENSEMBLE, MODEL_PATH, ["rating"])

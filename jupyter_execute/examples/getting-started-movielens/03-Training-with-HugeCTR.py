@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[ ]:
 
 
 # Copyright 2021 NVIDIA Corporation. All Rights Reserved.
@@ -22,7 +22,7 @@
 
 # <img src="http://developer.download.nvidia.com/compute/machine-learning/frameworks/nvidia_logo.png" style="width: 90px; float: right;">
 # 
-# ## Overview
+# # Getting Started MovieLens: Training with HugeCTR
 # 
 # In this notebook, we want to provide an overview what HugeCTR framework is, its features and benefits. We will use HugeCTR to train a basic neural network architecture.
 # 
@@ -332,6 +332,11 @@ model.add(
         top_names=["loss"],
     )
 )
+
+
+# In[9]:
+
+
 model.compile()
 model.summary()
 model.fit(max_iter=2000, display=100, eval_interval=200, snapshot=1900)
@@ -340,7 +345,7 @@ model.graph_to_json(graph_config_file=MODEL_DIR + "1/movielens.json")
 
 # After training terminates, we can see that multiple `.model` files and folders are generated. We need to move them inside `1` folder under the `movielens_hugectr` folder. 
 
-# In[9]:
+# In[10]:
 
 
 get_ipython().system('mv *.model {MODEL_DIR}')
