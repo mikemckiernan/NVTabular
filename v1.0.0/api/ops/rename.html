@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rename &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+    <link rel="canonical" href="https://nvidia-merlin.github.io/NVTabular/main/api/ops/rename.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -79,9 +80,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html">Torch Dataloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html#module-nvtabular.framework_utils.torch.layers.embeddings">Torch Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html#torch-layers">Torch Layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html">TensorFlow Dataloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html#module-nvtabular.framework_utils.tensorflow.layers.embedding">TensorFlow Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html#tensorflow-layers">TensorFlow Layers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../resources/index.html">Additional Resources</a></li>
@@ -100,10 +101,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">API Documentation</a> &raquo;</li>
-          <li><a href="index.html">Operators</a> &raquo;</li>
-      <li>Rename</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Documentation</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Operators</a></li>
+      <li class="breadcrumb-item active">Rename</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -136,8 +137,8 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<em>callable</em><em>, </em><em>optional</em>) – Function that takes a column name and returns a new column name</p></li>
-<li><p><strong>postfix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – If set each column name in the output will have this string appended to it</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – If set, a single input column will be renamed to this string</p></li>
+<li><p><strong>postfix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – If set each column name in the output will have this string appended to it</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – If set, a single input column will be renamed to this string</p></li>
 </ul>
 </dd>
 </dl>
@@ -220,7 +221,18 @@
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVJ1Y1YJHK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NVJ1Y1YJHK', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

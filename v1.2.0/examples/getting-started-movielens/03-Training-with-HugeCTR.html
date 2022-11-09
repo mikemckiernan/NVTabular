@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Getting Started MovieLens: Training with HugeCTR &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+    <link rel="canonical" href="https://nvidia-merlin.github.io/NVTabular/main/examples/getting-started-movielens/03-Training-with-HugeCTR.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -84,10 +85,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">NVTabular Example Notebooks</a> &raquo;</li>
-          <li><a href="index.html">Getting Started with Movielens</a> &raquo;</li>
-      <li>Getting Started MovieLens: Training with HugeCTR</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">NVTabular Example Notebooks</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Getting Started with Movielens</a></li>
+      <li class="breadcrumb-item active">Getting Started MovieLens: Training with HugeCTR</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -117,7 +118,7 @@
 </div>
 </div>
 <img alt="http://developer.download.nvidia.com/compute/machine-learning/frameworks/nvidia_logo.png" src="http://developer.download.nvidia.com/compute/machine-learning/frameworks/nvidia_logo.png" />
-<div class="tex2jax_ignore mathjax_ignore section" id="getting-started-movielens-training-with-hugectr">
+<div class="section" id="getting-started-movielens-training-with-hugectr">
 <h1>Getting Started MovieLens: Training with HugeCTR<a class="headerlink" href="#getting-started-movielens-training-with-hugectr" title="Permalink to this headline"></a></h1>
 <p>In this notebook, we want to provide an overview what HugeCTR framework is, its features and benefits. We will use HugeCTR to train a basic neural network architecture.</p>
 <p><b>Learning Objectives</b>:</p>
@@ -130,7 +131,7 @@
 <h2>Why using HugeCTR?<a class="headerlink" href="#why-using-hugectr" title="Permalink to this headline"></a></h2>
 <p>HugeCTR is a GPU-accelerated recommender framework designed to distribute training across multiple GPUs and nodes and estimate Click-Through Rates (CTRs).<br></p>
 <p>HugeCTR offers multiple advantages to train deep learning recommender systems:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><strong>Speed</strong>: HugeCTR is a highly efficient framework written C++. We experienced up to 10x speed up. HugeCTR on a NVIDIA DGX A100 system proved to be the fastest commercially available solution for training the architecture Deep Learning Recommender Model (DLRM) developed by Facebook.</p></li>
 <li><p><strong>Scale</strong>: HugeCTR supports model parallel scaling. It distributes the large embedding tables over multiple GPUs or multiple nodes.</p></li>
 <li><p><strong>Easy-to-use</strong>: Easy-to-use Python API similar to Keras. Examples for popular deep learning recommender systems architectures (Wide&amp;Deep, DLRM, DCN, DeepFM) are available.</p></li>
@@ -607,7 +608,18 @@ BinaryCrossEntropyLoss                  fc3                           loss
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVJ1Y1YJHK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NVJ1Y1YJHK', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

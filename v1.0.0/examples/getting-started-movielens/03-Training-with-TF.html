@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Getting Started MovieLens: Training with TensorFlow &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+    <link rel="canonical" href="https://nvidia-merlin.github.io/NVTabular/main/examples/getting-started-movielens/03-Training-with-TF.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -92,10 +93,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">NVTabular Example Notebooks</a> &raquo;</li>
-          <li><a href="index.html">Getting Started with Movielens</a> &raquo;</li>
-      <li>Getting Started MovieLens: Training with TensorFlow</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">NVTabular Example Notebooks</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Getting Started with Movielens</a></li>
+      <li class="breadcrumb-item active">Getting Started MovieLens: Training with TensorFlow</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -125,7 +126,7 @@
 </div>
 </div>
 <img alt="http://developer.download.nvidia.com/compute/machine-learning/frameworks/nvidia_logo.png" src="http://developer.download.nvidia.com/compute/machine-learning/frameworks/nvidia_logo.png" />
-<div class="tex2jax_ignore mathjax_ignore section" id="getting-started-movielens-training-with-tensorflow">
+<div class="section" id="getting-started-movielens-training-with-tensorflow">
 <h1>Getting Started MovieLens: Training with TensorFlow<a class="headerlink" href="#getting-started-movielens-training-with-tensorflow" title="Permalink to this headline"></a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
@@ -134,7 +135,7 @@
 <div class="section" id="learning-objectives">
 <h3>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline"></a></h3>
 <p>This notebook explains, how to use the NVTabular dataloader to accelerate TensorFlow training.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Use <strong>NVTabular dataloader</strong> with TensorFlow Keras model</p></li>
 <li><p>Leverage <strong>multi-hot encoded input features</strong></p></li>
 </ol>
@@ -468,7 +469,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/03-Training-with-TF_39_0.png" src="../../_images/03-Training-with-TF_39_0.png" />
+<img alt="../../_images/5fce60d4e6ad1873f8ba2cb900ab4b887e07fd34b32b8cd6a5a12fc599be6949.png" src="../../_images/5fce60d4e6ad1873f8ba2cb900ab4b887e07fd34b32b8cd6a5a12fc599be6949.png" />
 </div>
 </div>
 </div>
@@ -608,7 +609,18 @@ WARNING:absl:Function `_wrapped_model` contains input name(s) movieId, userId wi
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVJ1Y1YJHK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NVJ1Y1YJHK', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

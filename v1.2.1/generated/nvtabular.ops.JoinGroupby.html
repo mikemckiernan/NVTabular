@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>nvtabular.ops.JoinGroupby &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+    <link rel="canonical" href="https://nvidia-merlin.github.io/NVTabular/main/generated/nvtabular.ops.JoinGroupby.html" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -83,9 +84,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../api.html">API Documentation</a> &raquo;</li>
-      <li>nvtabular.ops.JoinGroupby</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API Documentation</a></li>
+      <li class="breadcrumb-item active">nvtabular.ops.JoinGroupby</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -124,19 +125,19 @@ categorical columns).</p>
 that “count” corresponds to the group itself, while all
 other statistics correspond to a specific continuous column.
 Supported statistics include [“count”, “sum”, “mean”, “std”, “var”].</p></li>
-<li><p><strong>tree_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – Tree width of the hash-based groupby reduction for each categorical
+<li><p><strong>tree_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Tree width of the hash-based groupby reduction for each categorical
 column. High-cardinality columns may require a large <cite>tree_width</cite>,
 while low-cardinality columns can likely use <cite>tree_width=1</cite>.
 If passing a dict, each key and value should correspond to the column
 name and width, respectively. The default value is 8 for all columns.</p></li>
 <li><p><strong>cat_cache</strong> (<em>ToDo Describe</em>) – TEXT</p></li>
-<li><p><strong>out_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Root directory where groupby statistics will be written out in
+<li><p><strong>out_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Root directory where groupby statistics will be written out in
 parquet format.</p></li>
-<li><p><strong>on_host</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>default True</em>) – Whether to convert cudf data to pandas between tasks in the hash-based
+<li><p><strong>on_host</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>default True</em>) – Whether to convert cudf data to pandas between tasks in the hash-based
 groupby reduction. The extra host &lt;-&gt; device data movement can reduce
 performance.  However, using <cite>on_host=True</cite> typically improves stability
 (by avoiding device-level memory pressure).</p></li>
-<li><p><strong>name_sep</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>default &quot;_&quot;</em>) – String separator to use between concatenated column names
+<li><p><strong>name_sep</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>default &quot;_&quot;</em>) – String separator to use between concatenated column names
 for multi-column groups.</p></li>
 </ul>
 </dd>
@@ -166,10 +167,10 @@ for multi-column groups.</p></li>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_input_schema</span></code>(root_schema, …)</p></td>
-<td><p>Given the schemas coming from upstream sources and a column selector for the input columns, returns a set of schemas for the input columns this operator will use :param root_schema: Base schema of the dataset before running any operators.</p></td>
+<td><p>Given the schemas coming from upstream sources and a column selector for the input columns, returns a set of schemas for the input columns this operator will use</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_output_schema</span></code>(input_schema, col_selector)</p></td>
-<td><p>Given a set of schemas and a column selector for the input columns, returns a set of schemas for the transformed columns this operator will produce :param input_schema: The schemas of the columns to apply this operator to :type input_schema: Schema :param col_selector: The column selector to apply to the input schema :type col_selector: ColumnSelector</p></td>
+<td><p>Given a set of schemas and a column selector for the input columns, returns a set of schemas for the transformed columns this operator will produce</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nvtabular.ops.JoinGroupby.compute_selector" title="nvtabular.ops.JoinGroupby.compute_selector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_selector</span></code></a>(input_schema, selector, …)</p></td>
 <td><p></p></td>
@@ -187,13 +188,16 @@ for multi-column groups.</p></li>
 <td><p>Configures this operator for use in inference.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_column_names</span></code>(col_selector)</p></td>
-<td><p>Given a set of columns names returns the names of the transformed columns this operator will produce :param columns: The columns to apply this operator to :type columns: list of str, or list of list of str</p></td>
+<td><p>Given a set of columns names returns the names of the transformed columns this operator will produce</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nvtabular.ops.JoinGroupby.set_storage_path" title="nvtabular.ops.JoinGroupby.set_storage_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_storage_path</span></code></a>(new_path[, copy])</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#nvtabular.ops.JoinGroupby.transform" title="nvtabular.ops.JoinGroupby.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code></a>(col_selector, df)</p></td>
 <td><p>Transform the dataframe by applying this operator to the set of input columns</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_schemas</span></code>(parents_schema, …[, …])</p></td>
+<td><p>Provides a hook method that sub-classes can override to implement schema validation logic.</p></td>
 </tr>
 </tbody>
 </table>
@@ -348,7 +352,18 @@ the computed statistics from the ‘fit’ object’</p>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVJ1Y1YJHK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NVJ1Y1YJHK', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

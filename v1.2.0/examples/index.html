@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NVTabular Example Notebooks &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+    <link rel="canonical" href="https://nvidia-merlin.github.io/NVTabular/main/examples/index.html" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -83,8 +84,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>NVTabular Example Notebooks</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">NVTabular Example Notebooks</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -93,13 +94,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="tex2jax_ignore mathjax_ignore section" id="nvtabular-example-notebooks">
+  <div class="section" id="nvtabular-example-notebooks">
 <h1>NVTabular Example Notebooks<a class="headerlink" href="#nvtabular-example-notebooks" title="Permalink to this headline"></a></h1>
 <p>We have a collection of Jupyter notebooks that are based on different datasets.
 These example notebooks demonstrate how to use NVTabular with TensorFlow, PyTorch, and <a class="reference external" href="https://github.com/NVIDIA/HugeCTR">HugeCTR</a>.
 Each example provides additional information about NVTabular’s features.</p>
 <p>If you’d like to create a full conda environment to run the example notebooks, do the following:</p>
-<ol>
+<ol class="arabic">
 <li><p>Use the <a class="reference external" href="https://github.com/NVIDIA/NVTabular/tree/main/conda/environments">environment files</a> that have been provided to install the CUDA Toolkit (11.0 or 11.2).</p></li>
 <li><p>Clone the NVTabular repo and run the following commands from the root directory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create -f<span class="o">=</span>conda/environments/nvtabular_dev_cuda11.2.yml
@@ -168,7 +169,7 @@ Depending on which example you want to run, you should use any one of these Dock
 </ul>
 <p>Beginning with the 22.06 release, each container includes the software for training models and performing inference.</p>
 <p>To run the example notebooks using Docker containers, do the following:</p>
-<ol>
+<ol class="arabic">
 <li><p>Pull the container by running the following command:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker run --gpus all --rm -it -p <span class="m">8888</span>:8888 -p <span class="m">8797</span>:8787 -p <span class="m">8796</span>:8786 --ipc<span class="o">=</span>host &lt;docker container&gt; /bin/bash
 </pre></div>
@@ -256,7 +257,18 @@ or http://127.0.0.1:8888/lab?token<span class="o">=</span>9b537d1fda9e4e9cadc673
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVJ1Y1YJHK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NVJ1Y1YJHK', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

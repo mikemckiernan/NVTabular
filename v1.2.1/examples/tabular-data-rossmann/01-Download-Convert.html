@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Preprocessing the Rossmann Store Sales Dataset &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+    <link rel="canonical" href="https://nvidia-merlin.github.io/NVTabular/main/examples/tabular-data-rossmann/01-Download-Convert.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -82,10 +83,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">NVTabular Example Notebooks</a> &raquo;</li>
-          <li><a href="index.html">Applying the Techniques to other Tabular Problems with Rossmann</a> &raquo;</li>
-      <li>Preprocessing the Rossmann Store Sales Dataset</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">NVTabular Example Notebooks</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Applying the Techniques to other Tabular Problems with Rossmann</a></li>
+      <li class="breadcrumb-item active">Preprocessing the Rossmann Store Sales Dataset</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -115,7 +116,7 @@
 </div>
 </div>
 <img alt="http://developer.download.nvidia.com/compute/machine-learning/frameworks/nvidia_logo.png" src="http://developer.download.nvidia.com/compute/machine-learning/frameworks/nvidia_logo.png" />
-<div class="tex2jax_ignore mathjax_ignore section" id="preprocessing-the-rossmann-store-sales-dataset">
+<div class="section" id="preprocessing-the-rossmann-store-sales-dataset">
 <h1>Preprocessing the Rossmann Store Sales Dataset<a class="headerlink" href="#preprocessing-the-rossmann-store-sales-dataset" title="Permalink to this headline"></a></h1>
 <p>Here we implement some feature engineering outlined by FastAI in <a class="reference external" href="https://github.com/fastai/course-v3/blob/master/nbs/dl1/lesson6-rossmann.ipynb">their example solution</a> to the <a class="reference external" href="https://www.kaggle.com/c/rossmann-store-sales">Kaggle Rossmann Store Sales competition</a> using Rapids cuDF library (GPU DataFrame library). We’ve simplified some sections and left out some of the documentation to keep things neat, so feel free to consult the original preprocessing <a class="reference external" href="https://github.com/fastai/course-v3/blob/master/nbs/dl1/rossman_data_clean.ipynb">notebook</a> for explanations of the feature engineering going on.</p>
 <div class="cell docutils container">
@@ -626,7 +627,18 @@ untarring files: 100%|██████████| 8/8 [00:00&lt;00:00, 28.73
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVJ1Y1YJHK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NVJ1Y1YJHK', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

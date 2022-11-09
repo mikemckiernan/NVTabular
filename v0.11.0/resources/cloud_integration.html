@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cloud Integration &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+    <link rel="canonical" href="https://nvidia-merlin.github.io/NVTabular/main/resources/cloud_integration.html" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -77,9 +78,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Additional Resources</a> &raquo;</li>
-      <li>Cloud Integration</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Additional Resources</a></li>
+      <li class="breadcrumb-item active">Cloud Integration</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -88,7 +89,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="tex2jax_ignore mathjax_ignore section" id="cloud-integration">
+  <div class="section" id="cloud-integration">
 <h1>Cloud Integration<a class="headerlink" href="#cloud-integration" title="Permalink to this headline"></a></h1>
 <p>You can run NVTabular on the cloud using:</p>
 <ul class="simple">
@@ -100,7 +101,7 @@
 <h2>Amazon Web Services<a class="headerlink" href="#amazon-web-services" title="Permalink to this headline"></a></h2>
 <p>Amazon Web Services (AWS) offers <a class="reference external" href="https://aws.amazon.com/ec2/instance-types/#Accelerated_Computing">EC2 instances with NVIDIA GPU support</a>. NVTabular can be used with 1x, 4x, or 8x GPU instances or multiple nodes. We’re using an EC2 instance with 8x NVIDIA A100 GPUs to demonstrate the steps below. Check out the $/h for this instance type and adjust the type.</p>
 <p>To run NVTabular on the cloud using AWS, do the following:</p>
-<ol>
+<ol class="arabic">
 <li><p>Start the AWS EC2 instance with the <a class="reference external" href="https://aws.amazon.com/marketplace/pp/NVIDIA-NVIDIA-Deep-Learning-AMI/B076K31M1S">NVIDIA Deep Learning AMI image</a> using the aws-cli.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Starts the P4D instance with 8x NVIDIA A100 GPUs (take a look at the $/h for this instance type before using them)</span>
 <span class="n">aws</span> <span class="n">ec2</span> <span class="n">run</span><span class="o">-</span><span class="n">instances</span> <span class="o">--</span><span class="n">image</span><span class="o">-</span><span class="nb">id</span> <span class="n">ami</span><span class="o">-</span><span class="mi">04</span><span class="n">c0416d6bd8e4b1f</span> <span class="o">--</span><span class="n">count</span> <span class="mi">1</span> <span class="o">--</span><span class="n">instance</span><span class="o">-</span><span class="nb">type</span> <span class="n">p4d</span><span class="mf">.24</span><span class="n">xlarge</span> <span class="o">--</span><span class="n">key</span><span class="o">-</span><span class="n">name</span> <span class="o">&lt;</span><span class="n">MyKeyPair</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">security</span><span class="o">-</span><span class="n">groups</span> <span class="o">&lt;</span><span class="n">my</span><span class="o">-</span><span class="n">sg</span><span class="o">&gt;</span>
@@ -140,7 +141,7 @@
 <h2>Google Cloud Platform<a class="headerlink" href="#google-cloud-platform" title="Permalink to this headline"></a></h2>
 <p>The Google Cloud Platform (GCP) offers <a class="reference external" href="https://cloud.google.com/compute/docs/gpus">Compute Engine instances with NVIDIA GPU support</a>. We’re using a VM with 8x NVIDIA A100 GPUs and eight local SSD-NVMe devices configured as RAID 0 to demonstrate the steps below.</p>
 <p>To run NVTabular on the cloud using GCP, do the following:</p>
-<ol>
+<ol class="arabic">
 <li><p>Configure and create the VM as follows:</p>
 <ul class="simple">
 <li><p><strong>GPU</strong>: 8xA100 (a2-highgpu-8g)</p></li>
@@ -193,7 +194,7 @@ sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi # Check Install
 <h2>Databricks<a class="headerlink" href="#databricks" title="Permalink to this headline"></a></h2>
 <p>Databricks has developed a web-based platform on top of Apache Spark to provide automated cluster management. Databricks currently supports <a class="reference external" href="https://docs.databricks.com/clusters/custom-containers.html">custom containers</a></p>
 <p>To run NVTabular on Databricks, do the following:</p>
-<ol>
+<ol class="arabic">
 <li><p>Create a custom NVTabular container using Databricks runtime.</p>
 <p><strong>NOTE</strong>: If any of the default dependencies that come with the Databricks cluster are changed to a different version, the Databricks cluster won’t be able to detect the Spark
 driver. As a workaround, the NVIDIA RAPIDS team has created a
@@ -284,7 +285,18 @@ Once the Databricks cluster is up, NVTabular will be running inside of it.</p></
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVJ1Y1YJHK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NVJ1Y1YJHK', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

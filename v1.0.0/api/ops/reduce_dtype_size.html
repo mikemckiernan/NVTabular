@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ReduceDtypeSize &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+    <link rel="canonical" href="https://nvidia-merlin.github.io/NVTabular/main/api/ops/reduce_dtype_size.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -79,9 +80,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html">Torch Dataloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html#module-nvtabular.framework_utils.torch.layers.embeddings">Torch Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html#torch-layers">Torch Layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html">TensorFlow Dataloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html#module-nvtabular.framework_utils.tensorflow.layers.embedding">TensorFlow Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html#tensorflow-layers">TensorFlow Layers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../resources/index.html">Additional Resources</a></li>
@@ -100,10 +101,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">API Documentation</a> &raquo;</li>
-          <li><a href="index.html">Operators</a> &raquo;</li>
-      <li>ReduceDtypeSize</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Documentation</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Operators</a></li>
+      <li class="breadcrumb-item active">ReduceDtypeSize</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -165,17 +166,19 @@ the computed statistics from the ‘fit’ object’</p>
 <dt id="nvtabular.ops.ReduceDtypeSize.compute_output_schema">
 <code class="sig-name descname"><span class="pre">compute_output_schema</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prev_output_schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/ops/reduce_dtype_size.html#ReduceDtypeSize.compute_output_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.ops.ReduceDtypeSize.compute_output_schema" title="Permalink to this definition"></a></dt>
 <dd><p>Given a set of schemas and a column selector for the input columns,
-returns a set of schemas for the transformed columns this operator will produce
-:param input_schema: The schemas of the columns to apply this operator to
-:type input_schema: Schema
-:param col_selector: The column selector to apply to the input schema
-:type col_selector: ColumnSelector</p>
+returns a set of schemas for the transformed columns this operator will produce</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The schemas of the columns produced by this operator</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_schema</strong> (<em>Schema</em>) – The schemas of the columns to apply this operator to</p></li>
+<li><p><strong>col_selector</strong> (<em>ColumnSelector</em>) – The column selector to apply to the input schema</p></li>
+</ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>Schema</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The schemas of the columns produced by this operator</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Schema</p>
 </dd>
 </dl>
 </dd></dl>
@@ -234,7 +237,18 @@ returns a set of schemas for the transformed columns this operator will produce
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVJ1Y1YJHK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NVJ1Y1YJHK', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

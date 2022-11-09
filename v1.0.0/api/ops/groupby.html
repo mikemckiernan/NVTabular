@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Groupby &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+    <link rel="canonical" href="https://nvidia-merlin.github.io/NVTabular/main/api/ops/groupby.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -79,9 +80,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html">Torch Dataloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html#module-nvtabular.framework_utils.torch.layers.embeddings">Torch Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html#torch-layers">Torch Layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html">TensorFlow Dataloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html#module-nvtabular.framework_utils.tensorflow.layers.embedding">TensorFlow Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html#tensorflow-layers">TensorFlow Layers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../resources/index.html">Additional Resources</a></li>
@@ -100,10 +101,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">API Documentation</a> &raquo;</li>
-          <li><a href="index.html">Operators</a> &raquo;</li>
-      <li>Groupby</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Documentation</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Operators</a></li>
+      <li class="breadcrumb-item active">Groupby</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -148,17 +149,17 @@ output may be incorrect. See: <code class="docutils literal notranslate"><span c
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>groupby_cols</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> or </em><em>list of str</em>) – The column names to be used as groupby keys.
+<li><p><strong>groupby_cols</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> or </em><em>list of str</em>) – The column names to be used as groupby keys.
 WARNING: Ensure the dataset was partitioned by those
 groupby keys (see above for an example).</p></li>
-<li><p><strong>sort_cols</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> or </em><em>list of str</em>) – Columns to be used to sort each partition before
+<li><p><strong>sort_cols</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> or </em><em>list of str</em>) – Columns to be used to sort each partition before
 groupby aggregation is performed. If this argument
 is not specified, the results will not be sorted.</p></li>
-<li><p><strong>aggs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Groupby aggregations to perform. Supported list-based
+<li><p><strong>aggs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Groupby aggregations to perform. Supported list-based
 aggregations include “list”, “first” &amp; “last”. Most
 conventional aggregations supported by Pandas/cuDF are
 also allowed (e.g. “sum”, “count”, “max”, “mean”, etc.).</p></li>
-<li><p><strong>name_sep</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – String separator to use for new column names.</p></li>
+<li><p><strong>name_sep</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – String separator to use for new column names.</p></li>
 </ul>
 </dd>
 </dl>
@@ -190,6 +191,11 @@ also allowed (e.g. “sum”, “count”, “max”, “mean”, etc.).</p></li
 <dl class="py method">
 <dt id="nvtabular.ops.Groupby.column_mapping">
 <code class="sig-name descname"><span class="pre">column_mapping</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_selector</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nvtabular/ops/groupby.html#Groupby.column_mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nvtabular.ops.Groupby.column_mapping" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="nvtabular.ops.Groupby.dependencies">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">dependencies</span></code><a class="headerlink" href="#nvtabular.ops.Groupby.dependencies" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -246,7 +252,18 @@ also allowed (e.g. “sum”, “count”, “max”, “mean”, etc.).</p></li
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVJ1Y1YJHK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NVJ1Y1YJHK', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

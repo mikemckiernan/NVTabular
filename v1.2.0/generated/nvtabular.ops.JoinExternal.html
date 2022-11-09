@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>nvtabular.ops.JoinExternal &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+    <link rel="canonical" href="https://nvidia-merlin.github.io/NVTabular/main/generated/nvtabular.ops.JoinExternal.html" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -83,9 +84,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../api.html">API Documentation</a> &raquo;</li>
-      <li>nvtabular.ops.JoinExternal</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API Documentation</a></li>
+      <li class="breadcrumb-item active">nvtabular.ops.JoinExternal</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -126,11 +127,11 @@ reasons, only “left” and “inner” join transformations are supported.</p>
 that the join must be a partition-wise transformation. Therefore,
 if <code class="docutils literal notranslate"><span class="pre">df_ext</span></code> is a multi-partition Dask collection, it will need to
 be broadcasted to every partition.</p></li>
-<li><p><strong>on</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>)</em>) – Column name(s) to merge on</p></li>
+<li><p><strong>on</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>)</em>) – Column name(s) to merge on</p></li>
 <li><p><strong>how</strong> (<em>{&quot;left&quot;</em><em>, </em><em>&quot;inner&quot;}; default &quot;left&quot;</em>) – Type of join operation to perform.</p></li>
-<li><p><strong>on_ext</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>)</em><em>; Optional</em>) – Column name(s) on external table to join on. By default,
+<li><p><strong>on_ext</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>)</em><em>; Optional</em>) – Column name(s) on external table to join on. By default,
 we assume <code class="docutils literal notranslate"><span class="pre">on_ext</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">on</span></code>.</p></li>
-<li><p><strong>columns_ext</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>)</em><em>; Optional</em>) – Subset of columns to select from external table before join.</p></li>
+<li><p><strong>columns_ext</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>)</em><em>; Optional</em>) – Subset of columns to select from external table before join.</p></li>
 <li><p><strong>drop_duplicates_ext</strong> (<em>bool; Default False</em>) – Drop duplicates from external table before join.</p></li>
 <li><p><strong>kind_ext</strong> (<em>ExtData; Optional</em>) – Format of <code class="docutils literal notranslate"><span class="pre">df_ext</span></code>.  If nothing is specified, the format
 will be inferred.</p></li>
@@ -162,7 +163,7 @@ is also supported when <code class="docutils literal notranslate"><span class="p
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_input_schema</span></code>(root_schema, …)</p></td>
-<td><p>Given the schemas coming from upstream sources and a column selector for the input columns, returns a set of schemas for the input columns this operator will use :param root_schema: Base schema of the dataset before running any operators.</p></td>
+<td><p>Given the schemas coming from upstream sources and a column selector for the input columns, returns a set of schemas for the input columns this operator will use</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nvtabular.ops.JoinExternal.compute_output_schema" title="nvtabular.ops.JoinExternal.compute_output_schema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_output_schema</span></code></a>(input_schema, col_selector)</p></td>
 <td><p></p></td>
@@ -177,10 +178,13 @@ is also supported when <code class="docutils literal notranslate"><span class="p
 <td><p>Configures this operator for use in inference.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_column_names</span></code>(col_selector)</p></td>
-<td><p>Given a set of columns names returns the names of the transformed columns this operator will produce :param columns: The columns to apply this operator to :type columns: list of str, or list of list of str</p></td>
+<td><p>Given a set of columns names returns the names of the transformed columns this operator will produce</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#nvtabular.ops.JoinExternal.transform" title="nvtabular.ops.JoinExternal.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code></a>(col_selector, df)</p></td>
 <td><p>Transform the dataframe by applying this operator to the set of input columns</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_schemas</span></code>(parents_schema, …[, …])</p></td>
+<td><p>Provides a hook method that sub-classes can override to implement schema validation logic.</p></td>
 </tr>
 </tbody>
 </table>
@@ -303,7 +307,18 @@ is also supported when <code class="docutils literal notranslate"><span class="p
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVJ1Y1YJHK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NVJ1Y1YJHK', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

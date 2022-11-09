@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JoinExternal &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+    <link rel="canonical" href="https://nvidia-merlin.github.io/NVTabular/main/api/ops/joinexternal.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -79,9 +80,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html">Torch Dataloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html#module-nvtabular.framework_utils.torch.layers.embeddings">Torch Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html#torch-layers">Torch Layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html">TensorFlow Dataloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html#module-nvtabular.framework_utils.tensorflow.layers.embedding">TensorFlow Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html#tensorflow-layers">TensorFlow Layers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../resources/index.html">Additional Resources</a></li>
@@ -100,10 +101,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">API Documentation</a> &raquo;</li>
-          <li><a href="index.html">Operators</a> &raquo;</li>
-      <li>JoinExternal</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Documentation</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Operators</a></li>
+      <li class="breadcrumb-item active">JoinExternal</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -144,11 +145,11 @@ reasons, only “left” and “inner” join transformations are supported.</p>
 that the join must be a partition-wise transformation. Therefore,
 if <code class="docutils literal notranslate"><span class="pre">df_ext</span></code> is a multi-partition Dask collection, it will need to
 be broadcasted to every partition.</p></li>
-<li><p><strong>on</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>)</em>) – Column name(s) to merge on</p></li>
+<li><p><strong>on</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>)</em>) – Column name(s) to merge on</p></li>
 <li><p><strong>how</strong> (<em>{&quot;left&quot;</em><em>, </em><em>&quot;inner&quot;}; default &quot;left&quot;</em>) – Type of join operation to perform.</p></li>
-<li><p><strong>on_ext</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>)</em><em>; Optional</em>) – Column name(s) on external table to join on. By default,
+<li><p><strong>on_ext</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>)</em><em>; Optional</em>) – Column name(s) on external table to join on. By default,
 we assume <code class="docutils literal notranslate"><span class="pre">on_ext</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">on</span></code>.</p></li>
-<li><p><strong>columns_ext</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>)</em><em>; Optional</em>) – Subset of columns to select from external table before join.</p></li>
+<li><p><strong>columns_ext</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>)</em><em>; Optional</em>) – Subset of columns to select from external table before join.</p></li>
 <li><p><strong>drop_duplicates_ext</strong> (<em>bool; Default False</em>) – Drop duplicates from external table before join.</p></li>
 <li><p><strong>kind_ext</strong> (<em>ExtData; Optional</em>) – Format of <code class="docutils literal notranslate"><span class="pre">df_ext</span></code>.  If nothing is specified, the format
 will be inferred.</p></li>
@@ -247,7 +248,18 @@ is also supported when <code class="docutils literal notranslate"><span class="p
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVJ1Y1YJHK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NVJ1Y1YJHK', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NVTabular | Documentation &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
+    <link rel="canonical" href="https://nvidia-merlin.github.io/NVTabular/main/Introduction.html" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -75,8 +76,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>NVTabular | Documentation</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">NVTabular | Documentation</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -139,7 +140,7 @@
 </pre></div>
 </div>
 <p>If you’d like to create a full conda environment to run the example notebooks, do the following:</p>
-<ol>
+<ol class="arabic">
 <li><p>Use the <a class="reference external" href="https://github.com/NVIDIA/NVTabular/tree/main/conda/environments">environment files</a> that have been provided to install the CUDA Toolkit (11.0 or 11.2).</p></li>
 <li><p>Clone the NVTabular repo and run the following commands from the root directory:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span><span class="o">=</span><span class="n">conda</span><span class="o">/</span><span class="n">environments</span><span class="o">/</span><span class="n">nvtabular_dev_cuda11</span><span class="mf">.2</span><span class="o">.</span><span class="n">yml</span>
@@ -156,34 +157,29 @@
 <div class="section" id="installing-nvtabular-with-docker">
 <h3>Installing NVTabular with Docker<a class="headerlink" href="#installing-nvtabular-with-docker" title="Permalink to this headline"></a></h3>
 <p>NVTabular Docker containers are available in the <a class="reference external" href="https://ngc.nvidia.com/catalog/containers/nvidia:merlin">NVIDIA Merlin container repository</a>. There are four different containers:</p>
-<table border="1" class="docutils">
+<table class="colwidths-auto docutils align-default">
 <thead>
-<tr>
-<th>Container Name</th>
-<th>Container Location</th>
-<th>Functionality</th>
+<tr class="row-odd"><th class="head"><p>Container Name</p></th>
+<th class="head"><p>Container Location</p></th>
+<th class="head"><p>Functionality</p></th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>merlin-inference</td>
-<td>https://ngc.nvidia.com/catalog/containers/nvidia:merlin:merlin-inference</td>
-<td>NVTabular, HugeCTR, and Triton Inference</td>
+<tr class="row-even"><td><p>merlin-inference</p></td>
+<td><p><a class="reference external" href="https://ngc.nvidia.com/catalog/containers/nvidia:merlin:merlin-inference">https://ngc.nvidia.com/catalog/containers/nvidia:merlin:merlin-inference</a></p></td>
+<td><p>NVTabular, HugeCTR, and Triton Inference</p></td>
 </tr>
-<tr>
-<td>merlin-training</td>
-<td>https://ngc.nvidia.com/catalog/containers/nvidia:merlin:merlin-training</td>
-<td>NVTabular and HugeCTR</td>
+<tr class="row-odd"><td><p>merlin-training</p></td>
+<td><p><a class="reference external" href="https://ngc.nvidia.com/catalog/containers/nvidia:merlin:merlin-training">https://ngc.nvidia.com/catalog/containers/nvidia:merlin:merlin-training</a></p></td>
+<td><p>NVTabular and HugeCTR</p></td>
 </tr>
-<tr>
-<td>merlin-tensorflow-training</td>
-<td>https://ngc.nvidia.com/catalog/containers/nvidia:merlin:merlin-tensorflow-training</td>
-<td>NVTabular, TensorFlow, and HugeCTR Tensorflow Embedding plugin</td>
+<tr class="row-even"><td><p>merlin-tensorflow-training</p></td>
+<td><p><a class="reference external" href="https://ngc.nvidia.com/catalog/containers/nvidia:merlin:merlin-tensorflow-training">https://ngc.nvidia.com/catalog/containers/nvidia:merlin:merlin-tensorflow-training</a></p></td>
+<td><p>NVTabular, TensorFlow, and HugeCTR Tensorflow Embedding plugin</p></td>
 </tr>
-<tr>
-<td>merlin-pytorch-training</td>
-<td>https://ngc.nvidia.com/catalog/containers/nvidia:merlin:merlin-pytorch-training</td>
-<td>NVTabular and PyTorch</td>
+<tr class="row-odd"><td><p>merlin-pytorch-training</p></td>
+<td><p><a class="reference external" href="https://ngc.nvidia.com/catalog/containers/nvidia:merlin:merlin-pytorch-training">https://ngc.nvidia.com/catalog/containers/nvidia:merlin:merlin-pytorch-training</a></p></td>
+<td><p>NVTabular and PyTorch</p></td>
 </tr>
 </tbody>
 </table>
@@ -268,7 +264,18 @@
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVJ1Y1YJHK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NVJ1Y1YJHK', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

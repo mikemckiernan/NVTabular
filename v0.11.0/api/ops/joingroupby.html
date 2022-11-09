@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JoinGroupby &mdash; NVTabular 2021 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+    <link rel="canonical" href="https://nvidia-merlin.github.io/NVTabular/main/api/ops/joingroupby.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -77,9 +78,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html">Torch Dataloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html#module-nvtabular.framework_utils.torch.layers.embeddings">Torch Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../torch_dataloader.html#torch-layers">Torch Layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html">TensorFlow Dataloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html#module-nvtabular.framework_utils.tensorflow.layers.embedding">TensorFlow Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tensorflow_dataloader.html#tensorflow-layers">TensorFlow Layers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../resources/index.html">Additional Resources</a></li>
@@ -98,10 +99,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">API Documentation</a> &raquo;</li>
-          <li><a href="index.html">Operators</a> &raquo;</li>
-      <li>JoinGroupby</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Documentation</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Operators</a></li>
+      <li class="breadcrumb-item active">JoinGroupby</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -140,19 +141,19 @@ categorical columns).</p>
 that “count” corresponds to the group itself, while all
 other statistics correspond to a specific continuous column.
 Supported statistics include [“count”, “sum”, “mean”, “std”, “var”].</p></li>
-<li><p><strong>tree_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – Tree width of the hash-based groupby reduction for each categorical
+<li><p><strong>tree_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Tree width of the hash-based groupby reduction for each categorical
 column. High-cardinality columns may require a large <cite>tree_width</cite>,
 while low-cardinality columns can likely use <cite>tree_width=1</cite>.
 If passing a dict, each key and value should correspond to the column
 name and width, respectively. The default value is 8 for all columns.</p></li>
 <li><p><strong>cat_cache</strong> (<em>ToDo Describe</em>) – TEXT</p></li>
-<li><p><strong>out_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Root directory where groupby statistics will be written out in
+<li><p><strong>out_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Root directory where groupby statistics will be written out in
 parquet format.</p></li>
-<li><p><strong>on_host</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>default True</em>) – Whether to convert cudf data to pandas between tasks in the hash-based
+<li><p><strong>on_host</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>default True</em>) – Whether to convert cudf data to pandas between tasks in the hash-based
 groupby reduction. The extra host &lt;-&gt; device data movement can reduce
 performance.  However, using <cite>on_host=True</cite> typically improves stability
 (by avoiding device-level memory pressure).</p></li>
-<li><p><strong>name_sep</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>default &quot;_&quot;</em>) – String separator to use between concatenated column names
+<li><p><strong>name_sep</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>default &quot;_&quot;</em>) – String separator to use between concatenated column names
 for multi-column groups.</p></li>
 </ul>
 </dd>
@@ -275,7 +276,18 @@ the computed statistics from the ‘fit’ object’</p>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVJ1Y1YJHK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NVJ1Y1YJHK', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>
