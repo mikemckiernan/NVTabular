@@ -111,11 +111,11 @@ Each example provides additional information about NVTabular’s features.</p>
 <ol class="arabic">
 <li><p>Use the <a class="reference external" href="https://github.com/NVIDIA/NVTabular/tree/main/conda/environments">environment files</a> that have been provided to install the CUDA Toolkit (11.0 or 11.2).</p></li>
 <li><p>Clone the NVTabular repo and run the following commands from the root directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create -f<span class="o">=</span>conda/environments/nvtabular_dev_cuda11.2.yml
-conda activate nvtabular_dev_11.2
-python -m ipykernel install --user --name<span class="o">=</span>nvt
-pip install -e .
-jupyter notebook
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="o">=</span>conda/environments/nvtabular_dev_cuda11.2.yml
+conda<span class="w"> </span>activate<span class="w"> </span>nvtabular_dev_11.2
+python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="o">=</span>nvt
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+jupyter<span class="w"> </span>notebook
 </pre></div>
 </div>
 <p>When opening a notebook, be sure to select <code class="docutils literal notranslate"><span class="pre">nvt</span></code> from the <code class="docutils literal notranslate"><span class="pre">Kernel-&gt;Change</span> <span class="pre">Kernel</span></code> menu.</p>
